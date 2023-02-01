@@ -7,6 +7,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login-page/login.component';
 import { MainComponent } from './pages/main-page/main.component';
 import { RegisterComponent } from './pages/register-page/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -17,8 +22,12 @@ import { RegisterComponent } from './pages/register-page/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule
   ],
+  exports: [MatButtonModule,MatToolbarModule],
   providers: [],
   bootstrap: [AppComponent]
 })
