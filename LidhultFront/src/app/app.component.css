@@ -1,3 +1,7 @@
 /* ::ng-deep .mat-toolbar, .mat-toolbar-color{
     background-color: red;
   } */
+
+  .spacer {
+    flex: 1 1 auto;
+  }
