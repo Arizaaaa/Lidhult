@@ -92,7 +92,7 @@ class ProfessorController extends Controller
                 'center' => 'required',
             ]);
 
-            DB::update('update professor set nombre = ?, apellidos = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
+            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
             [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->center, $request->id]);
             DB::commit();
             
@@ -114,24 +114,35 @@ class ProfessorController extends Controller
 
     public function read(Request $request) { // Lee un profesor
 
-        $request->validate([
-            'id' => '',
-            'name' => '',
-            'surnames' => '',
-            'email' => '',
-            'nick' => '',
-            'center' => '',
-        ]);
+        try{
 
-        $professor = new Professor();
-        $professor = DB::select('select * FROM professor WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR center = ?',
-        [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->center]);
+            $request->validate([
+                'id' => '',
+                'name' => '',
+                'surnames' => '',
+                'email' => '',
+                'nick' => '',
+                'center' => '',
+            ]);
 
-        return $professor;
+            $professor = Professor::findOrFail($request->id);
+            $professor = DB::select('select * FROM professors WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR center = ?',
+            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->center]);
 
-        return response()->json([
-            "status" => 1,
-            "msg" => "Vista exitosa!",
-        ]);
+            return $professor;
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Vista exitosa!",
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "No se ha encontrado! + $e",
+            ]);
+
+        }
     }
 }
