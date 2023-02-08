@@ -1,0 +1,34 @@
+.display-flex {
+    gap: 5rem; 
+    display: flex;
+    place-items: center;
+    justify-content: center;
+
+}
+
+.medio {
+    width: 45%;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20vh;
+}
+
+.texto {
+    letter-spacing: 0.5px;
+    font-weight: 400;
+    font-family: cursive;
+    font-size: 2.1875rem;
+    line-height: 1.37;
+}
+
+.botones {
+    background-color: #3F51B5;
+    border: 1px solid transparent;
+    color: #fff;
+    padding: 0 10rem;
+    text-align: center;
+    font-size: 1.125rem;
+    letter-spacing: 0.4px;
+    height: 3.5rem;
+    margin-top: 2.5rem;
+}
