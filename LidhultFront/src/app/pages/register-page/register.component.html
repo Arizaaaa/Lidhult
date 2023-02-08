@@ -1,36 +1,40 @@
 <mat-card>
     <mat-card-content>
-      <form>
+      <form (ngSubmit)="register()" [formGroup]="registerForm">
         <h2>Register</h2>
         <mat-form-field>
             <mat-label>Nick</mat-label>
-            <input matInput placeholder="Nick" name="nick">
+            <input matInput placeholder="Nick" name="nick" formControlName = "nick">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" name="email">
+            <input matInput placeholder="Email" name="email" formControlName = "email">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Contraseña</mat-label>
-            <input matInput placeholder="Contraseña" name="contraseña">
+            <input matInput placeholder="Contraseña" name="contraseña" formControlName = "con">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirma la contraseña</mat-label>
+            <input matInput placeholder="Contraseña" name="contraseña" formControlName = "conValidate">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Nombre" name="nombre">
+            <input matInput placeholder="Nombre" name="nombre" formControlName = "name">
         </mat-form-field>
         <mat-form-field class="width">
             <mat-label>Apellido</mat-label>
-            <input matInput placeholder="Apellido" name="apellido">
+            <input matInput placeholder="Apellido" name="apellido" formControlName = "surname">
         </mat-form-field>
         <mat-form-field>
             <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Elija una fecha">
+            <input matInput [matDatepicker]="picker" placeholder="Elija una fecha" formControlName = "date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-card-actions>
+            <button mat-raised-button color="primary">REGISTER</button>
+        </mat-card-actions>
       </form>
     </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button color="primary">REGISTER</button>
-    </mat-card-actions>
   </mat-card>

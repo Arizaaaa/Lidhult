@@ -12,7 +12,7 @@ class ProfessorController extends Controller
     public function create(Request $request) { // Crea un profesor
 
         try{
-            
+            dd($request);
             DB::beginTransaction();
             $request->validate([
                 'name' => 'required',

@@ -14,14 +14,11 @@ loginForm = new FormGroup({
   });
 
   constructor() { }
-
-
-  ngOnInit(): void {
-
-  }
+  
+  ngOnInit(): void {}
 
   search(){
-    console.log(this.loginForm)
+    console.log(this.loginForm.controls['email'].value)
 
   }
 
