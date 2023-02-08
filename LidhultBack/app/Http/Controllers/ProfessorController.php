@@ -6,6 +6,7 @@ use App\Models\Professor;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProfessorController extends Controller
 {
@@ -27,7 +28,7 @@ class ProfessorController extends Controller
             $professor->surnames = $request->surnames;
             $professor->email = $request->email;
             $professor->nick = $request->nick;
-            $professor->password = $request->password;
+            $professor->password = Hash::make($request->password);
             $professor->center = $request->center;
             $professor->save();
             DB::commit();
@@ -93,7 +94,7 @@ class ProfessorController extends Controller
             ]);
 
             DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->center, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->center, $request->id]);
             DB::commit();
             
             return response()->json([
