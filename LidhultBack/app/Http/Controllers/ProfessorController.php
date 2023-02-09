@@ -146,4 +146,36 @@ class ProfessorController extends Controller
 
         }
     }
+
+    public function login(Request $request) {
+
+        try{
+
+            $request->validate([
+                'dato' => '',
+                'password' => '',
+            ]);
+
+            $professor = Professor::findOrFail($request->id);
+            $professor = DB::select('select * FROM professors WHERE email = ? OR nick = ? AND password = ?',
+            [$request->dato, $request->dato, $request->center]);
+
+            return $professor;
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Login exitoso!",
+                "data" => $professor,
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha logueado! + $e",
+            ]);
+
+        }
+
+    }
 }
