@@ -17,8 +17,7 @@ loginForm = new FormGroup({
   
   ngOnInit(): void {}
 
-  search(){
-    console.log(this.loginForm.controls['email'].value)
+  login(){
 
   }
 

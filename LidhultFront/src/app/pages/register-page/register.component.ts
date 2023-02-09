@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
     name: null,
     surnames: null,
     password: null,
-    date: null
+    birth_date: null
   };
 
   registerForm = new FormGroup({
@@ -46,9 +46,9 @@ export class RegisterComponent implements OnInit {
         this.student['name'] = this.registerForm.controls['name'].value
         this.student['surnames'] = this.registerForm.controls['surname'].value
         this.student['password'] = this.registerForm.controls['con'].value
-        this.student['date'] = this.registerForm.controls['date'].value
+        this.student['birth_date'] = this.registerForm.controls['date'].value!.toString()
 
-      this.authService.register(this.student).subscribe({
+      this.authService.registerStudent(this.student).subscribe({
       
         next: (value: Student) => {
           this.student = value;

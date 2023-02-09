@@ -5,6 +5,6 @@ export interface Student {
     surnames:string | null, 
     email:string | null,
     password:string | null,
-    date:string | null,
+    birth_date:string | null,
     
 }

@@ -12,8 +12,8 @@ export class AuthService {
 
   constructor(public http: HttpClient) { }
 
-  register(student:Student) : Observable<Student>{
-
+  registerStudent(student:Student) : Observable<Student>{
+    console.log(student);
    return this.http.post<Student>(this.registeStudentrUrl, student).pipe(
     filter((value: any) => {
       let found = false;
