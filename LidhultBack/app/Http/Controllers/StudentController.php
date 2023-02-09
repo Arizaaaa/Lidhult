@@ -6,6 +6,7 @@ use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -27,7 +28,7 @@ class StudentController extends Controller
             $student->surnames = $request->surnames;
             $student->email = $request->email;
             $student->nick = $request->nick;
-            $student->password = $request->password;
+            $student->password = Hash::make($request->password);
             $student->birth_date = $request->birth_date;
             $student->save();
             DB::commit();
@@ -92,6 +93,8 @@ class StudentController extends Controller
                 'birth_date' => 'required',
             ]);
 
+            $request->password = Hash::make($request->password);
+
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
             [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->birth_date, $request->id]);
             DB::commit();
@@ -152,9 +155,11 @@ class StudentController extends Controller
         try{
 
             $request->validate([
-                'dato' => '',
-                'password' => '',
+                'dato' => 'required',
+                'password' => 'required',
             ]);
+
+            $request->password = Hash::make($request->password);
 
             $student = Student::findOrFail($request->id);
             $student = DB::select('select * FROM professors WHERE email = ? OR nick = ? AND password = ?',
