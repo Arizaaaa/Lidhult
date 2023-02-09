@@ -155,8 +155,8 @@ class ProfessorController extends Controller
         try{
 
             $request->validate([
-                'dato' => '',
-                'password' => '',
+                'dato' => 'required',
+                'password' => 'required',
             ]);
 
             $request->password = Hash::make($request->password);
