@@ -12,7 +12,7 @@ class ProfessorController extends Controller
     public function create(Request $request) { // Crea un profesor
 
         try{
-            dd($request);
+
             DB::beginTransaction();
             $request->validate([
                 'name' => 'required',
@@ -41,7 +41,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido insertar! + $e",
             ]);
         }
@@ -71,7 +71,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido eliminar! + $e",
             ]);
         }       
@@ -105,7 +105,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
             ]);
         }    
@@ -134,12 +134,13 @@ class ProfessorController extends Controller
             return response()->json([
                 "status" => 1,
                 "msg" => "Vista exitosa!",
+                "data" => $professor,
             ]);
 
         } catch (Exception $e) {
 
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha encontrado! + $e",
             ]);
 
