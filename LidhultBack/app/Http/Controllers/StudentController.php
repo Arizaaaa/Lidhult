@@ -149,38 +149,4 @@ class StudentController extends Controller
 
         }
     }
-
-    public function login(Request $request) {
-
-        try{
-
-            $request->validate([
-                'dato' => 'required',
-                'password' => 'required',
-            ]);
-
-            $request->password = Hash::make($request->password);
-
-            $student = Student::findOrFail($request->id);
-            $student = DB::select('select * FROM professors WHERE email = ? OR nick = ? AND password = ?',
-            [$request->dato, $request->dato, $request->center]);
-
-            return $student;
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Login exitoso!",
-                "data" => $student,
-            ]);
-
-        } catch (Exception $e) {
-
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se ha logueado! + $e",
-            ]);
-
-        }
-
-    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
@@ -20,12 +21,11 @@ Route::post('createProfessor', [ProfessorController::class, 'create']);
 Route::delete('deleteProfessor', [ProfessorController::class, 'delete']);
 Route::post('updateProfessor', [ProfessorController::class, 'update']);
 Route::post('readProfessor', [ProfessorController::class, 'read']);
-Route::post('loginProfessor', [ProfessorController::class, 'login']);
 Route::post('createStudent', [StudentController::class, 'create']);
 Route::delete('deleteStudent', [StudentController::class, 'delete']);
 Route::post('updateStudent', [StudentController::class, 'update']);
 Route::post('readStudent', [StudentController::class, 'read']);
-Route::post('loginStudent', [ProfessorController::class, 'login']);
+Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
