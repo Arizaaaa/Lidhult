@@ -13,7 +13,7 @@ class ProfessorController extends Controller
     public function create(Request $request) { // Crea un profesor
 
         try{
-            
+
             DB::beginTransaction();
             $request->validate([
                 'name' => 'required',
@@ -42,7 +42,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido insertar! + $e",
             ]);
         }
@@ -58,7 +58,7 @@ class ProfessorController extends Controller
                 'id' => 'required',
             ]);
 
-            $professor = Professor::find($request->id);
+            $professor = Professor::findOrFail($request->id);
             $professor = DB::table('professors')->where('id', $request->id)->first();
             DB::table('professors')->where('id', $request->id)->delete();
             DB::commit();
@@ -72,7 +72,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido eliminar! + $e",
             ]);
         }       
@@ -93,6 +93,8 @@ class ProfessorController extends Controller
                 'center' => 'required',
             ]);
 
+            $request->password = Hash::make($request->password);
+
             DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
             [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->center, $request->id]);
             DB::commit();
@@ -106,7 +108,7 @@ class ProfessorController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
             ]);
         }    
@@ -135,12 +137,13 @@ class ProfessorController extends Controller
             return response()->json([
                 "status" => 1,
                 "msg" => "Vista exitosa!",
+                "data" => $professor,
             ]);
 
         } catch (Exception $e) {
 
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha encontrado! + $e",
             ]);
 

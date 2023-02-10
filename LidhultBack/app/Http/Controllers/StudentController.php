@@ -42,7 +42,7 @@ class StudentController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido insertar! + $e",
             ]);
         }
@@ -58,7 +58,7 @@ class StudentController extends Controller
                 'id' => 'required',
             ]);
 
-            $student = Student::find($request->id);
+            $student = Student::findOrFail($request->id);
             $student = DB::table('students')->where('id', $request->id)->first();
             DB::table('students')->where('id', $request->id)->delete();
             DB::commit();
@@ -72,7 +72,7 @@ class StudentController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido eliminar! + $e",
             ]);
         }       
@@ -93,6 +93,8 @@ class StudentController extends Controller
                 'birth_date' => 'required',
             ]);
 
+            $request->password = Hash::make($request->password);
+
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
             [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->birth_date, $request->id]);
             DB::commit();
@@ -106,7 +108,7 @@ class StudentController extends Controller
 
             DB::rollBack();
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
             ]);
         }    
@@ -135,12 +137,13 @@ class StudentController extends Controller
             return response()->json([
                 "status" => 1,
                 "msg" => "Vista exitosa!",
+                "data" => $student,
             ]);
 
         } catch (Exception $e) {
 
             return response()->json([
-                "status" => 1,
+                "status" => 0,
                 "msg" => "No se ha encontrado! + $e",
             ]);
 

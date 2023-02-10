@@ -19,7 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { SelectComponent } from './pages/select/select.component';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SelectComponent } from './pages/select/select.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -45,7 +47,7 @@ import { SelectComponent } from './pages/select/select.component';
     ReactiveFormsModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
