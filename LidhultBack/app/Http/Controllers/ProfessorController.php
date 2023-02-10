@@ -22,6 +22,7 @@ class ProfessorController extends Controller
                 'nick' => 'required',
                 'password' => 'required',
                 'center' => 'required',
+                'image' => '',
             ]);
             $professor = new Professor();
             $professor->name = $request->name;
@@ -30,6 +31,7 @@ class ProfessorController extends Controller
             $professor->nick = $request->nick;
             $professor->password = Hash::make($request->password);
             $professor->center = $request->center;
+            $professor->image = $request->image;
             $professor->save();
             DB::commit();
 
@@ -91,12 +93,13 @@ class ProfessorController extends Controller
                 'nick' => 'required',
                 'password' => 'required',
                 'center' => 'required',
+                'image' => '',
             ]);
 
             $request->password = Hash::make($request->password);
 
-            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->center, $request->id]);
+            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ?, image = ? WHERE id = ?',
+            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->center, $request->image, $request->id]);
             DB::commit();
             
             return response()->json([
@@ -126,11 +129,12 @@ class ProfessorController extends Controller
                 'email' => '',
                 'nick' => '',
                 'center' => '',
+                'image' => '',
             ]);
 
             $professor = Professor::findOrFail($request->id);
-            $professor = DB::select('select * FROM professors WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR center = ?',
-            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->center]);
+            $professor = DB::select('select * FROM professors WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR center = ? OR image = ?',
+            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->center, $request->image]);
 
             return $professor;
 

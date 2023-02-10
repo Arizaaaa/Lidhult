@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nick')->unique();
             $table->string('password');
             $table->string('center');
+            $table->string('image');
             $table->timestamps();
         });
     }

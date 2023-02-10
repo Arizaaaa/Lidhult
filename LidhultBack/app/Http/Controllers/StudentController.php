@@ -22,6 +22,7 @@ class StudentController extends Controller
                 'nick' => 'required',
                 'password' => 'required',
                 'birth_date' => 'required',
+                'image' => '',
             ]);
             $student = new Student();
             $student->name = $request->name;
@@ -30,6 +31,7 @@ class StudentController extends Controller
             $student->nick = $request->nick;
             $student->password = Hash::make($request->password);
             $student->birth_date = $request->birth_date;
+            $student->image = $request->image;
             $student->save();
             DB::commit();
 
@@ -91,12 +93,13 @@ class StudentController extends Controller
                 'nick' => 'required',
                 'password' => 'required',
                 'birth_date' => 'required',
+                'image' => '',
             ]);
 
             $request->password = Hash::make($request->password);
 
-            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->birth_date, $request->id]);
+            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ?, image = ? WHERE id = ?',
+            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->birth_date, $request->image, $request->id]);
             DB::commit();
             
             return response()->json([
@@ -126,11 +129,12 @@ class StudentController extends Controller
                 'email' => '',
                 'nick' => '',
                 'birth_date' => '',
+                'image' => '',
             ]);
 
             $student = Student::findOrFail($request->id);
-            $student = DB::select('select * FROM students WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR birth_date = ?',
-            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->birth_date]);
+            $student = DB::select('select * FROM students WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR birth_date = ? OR image = ?',
+            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->birth_date, $request->image]);
 
             return $student;
 
