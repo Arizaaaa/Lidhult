@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Professor;
 use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,13 +22,18 @@ class LoginController extends Controller
 
             $request->password = Hash::make($request->password);
 
-            $user = DB::select('select * FROM students WHERE email = ? OR nick = ? AND password = ?',
-            [$request->dato, $request->dato, $request->center]);
+            $user = DB::select('select * FROM students WHERE email = ? AND password = ? OR nick = ? AND password = ?',
+            [$request->dato,$request->password, $request->dato, $request->password]);
 
             if ($user == null) {
+
                 $user = DB::select('select * FROM professors WHERE email = ? OR nick = ? AND password = ?',
-                [$request->dato, $request->dato, $request->center]);
+                [$request->dato, $request->dato, $request->password]);
+                
+                if($user == null){ abort(500); }
+
             }
+            
 
             return response()->json([
                 "status" => 1,
@@ -40,6 +46,7 @@ class LoginController extends Controller
             return response()->json([
                 "status" => 0,
                 "msg" => "No se ha logueado! + $e",
+                
             ]);
 
         }

@@ -1,4 +1,4 @@
-export interface Student {
+export interface RegisterDataStudent {
 
     nick:string | null,
     name:string | null,
@@ -6,5 +6,7 @@ export interface Student {
     email:string | null,
     password:string | null,
     birth_date:string | null,
-    
+
 }
+
+

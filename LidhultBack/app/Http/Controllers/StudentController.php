@@ -58,7 +58,7 @@ class StudentController extends Controller
                 'id' => 'required',
             ]);
 
-            $student = Student::find($request->id);
+            $student = Student::findOrFail($request->id);
             $student = DB::table('students')->where('id', $request->id)->first();
             DB::table('students')->where('id', $request->id)->delete();
             DB::commit();

@@ -3,11 +3,11 @@
    <mat-card-content>
      <form (ngSubmit)="login()" [formGroup]="loginForm">
        <h2>Log In</h2>
-       <mat-error>
+       <!-- <mat-error>
          The username and password were not recognized
-       </mat-error>
+       </mat-error> -->
        <mat-form-field>
-         <input matInput placeholder="Email" name="email" formControlName = "email">
+         <input matInput type="text" placeholder="Email or Nick" name="text" formControlName = "text">
          <mat-error>
            Please provide a valid email address
          </mat-error>

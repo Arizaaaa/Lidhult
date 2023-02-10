@@ -1,4 +1,5 @@
-import { Student } from './../../model/student';
+import { Router } from '@angular/router';
+import { RegisterDataStudent } from './../../model/register-data-student';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,7 +11,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  student: Student = {
+  public status = 0; 
+
+  student: RegisterDataStudent = {
     nick: null,
     email: null,
     name: null,
@@ -31,6 +34,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private router: Router
+
     ) { 
   }
 
@@ -50,11 +55,15 @@ export class RegisterComponent implements OnInit {
 
       this.authService.registerStudent(this.student).subscribe({
       
-        next: (value: Student) => {
+        next: (value: any) => {
           this.student = value;
-          console.log(value)
+          console.log(value['status'])
+          if(value['status'] == 1){
+            this.status = value['status']
+            this.router.navigate(['main']);
+          }
         }
-      });;
-    }
+      });
+    } 
   }
 }

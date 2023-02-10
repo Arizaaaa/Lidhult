@@ -58,7 +58,7 @@ class ProfessorController extends Controller
                 'id' => 'required',
             ]);
 
-            $professor = Professor::find($request->id);
+            $professor = Professor::findOrFail($request->id);
             $professor = DB::table('professors')->where('id', $request->id)->first();
             DB::table('professors')->where('id', $request->id)->delete();
             DB::commit();
