@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { SelectComponent } from './pages/select/select.component';
 
 
 
