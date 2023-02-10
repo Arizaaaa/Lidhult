@@ -20,21 +20,20 @@ class LoginController extends Controller
                 'password' => 'required',
             ]);
 
-            $request->password = Hash::make($request->password);
-
-            $user = DB::select('select * FROM students WHERE email = ? AND password = ? OR nick = ? AND password = ?',
-            [$request->dato,$request->password, $request->dato, $request->password]);
+            $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
+            [$request->dato, $request->dato]);
 
             if ($user == null) {
 
-                $user = DB::select('select * FROM professors WHERE email = ? OR nick = ? AND password = ?',
-                [$request->dato, $request->dato, $request->password]);
+                $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
+                [$request->dato, $request->dato]);
                 
-                if($user == null){ abort(500); }
+                if($user == null || !password_verify($request->password, $user[0]->password)) { abort(500); }
 
+            } else {
+                if(!password_verify($request->password, $user[0]->password)) { abort(500); }
             }
             
-
             return response()->json([
                 "status" => 1,
                 "msg" => "Login exitoso!",
