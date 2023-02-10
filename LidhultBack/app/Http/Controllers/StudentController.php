@@ -96,7 +96,7 @@ class StudentController extends Controller
             $request->password = Hash::make($request->password);
 
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->birth_date, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->birth_date, $request->id]);
             DB::commit();
             
             return response()->json([

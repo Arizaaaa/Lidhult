@@ -96,7 +96,7 @@ class ProfessorController extends Controller
             $request->password = Hash::make($request->password);
 
             DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->center, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->center, $request->id]);
             DB::commit();
             
             return response()->json([

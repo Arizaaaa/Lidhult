@@ -22,12 +22,14 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MainComponent
+    MainComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,
