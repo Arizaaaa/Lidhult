@@ -21,7 +21,7 @@ class ProfessorController extends Controller
                 'email' => 'required',
                 'nick' => 'required',
                 'password' => 'required',
-                'center' => 'required',
+                'birth_date' => 'required',
             ]);
             $professor = new Professor();
             $professor->name = $request->name;
@@ -29,7 +29,7 @@ class ProfessorController extends Controller
             $professor->email = $request->email;
             $professor->nick = $request->nick;
             $professor->password = Hash::make($request->password);
-            $professor->center = $request->center;
+            $professor->center = $request->birth_date;
             $professor->save();
             DB::commit();
 

@@ -1,3 +1,4 @@
+import { MessagesService } from './../../services/messages.service';
 import { LoginData } from './../../model/login-data';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,13 +24,13 @@ export class LoginComponent implements OnInit {
 
   constructor(  
     public authService: AuthService,
+    public messageService: MessagesService,
     private router: Router
   ) { }
   
   ngOnInit(): void {}
 
   login(){
-
     this.datos['dato'] =  this.loginForm.controls['text'].value;
     this.datos['password'] =  this.loginForm.controls['password'].value;
 
@@ -37,14 +38,20 @@ export class LoginComponent implements OnInit {
 
       next: (value: LoginData) => {
         this.datos = value;
-        console.log(value)
+        this.comporbacionLogin(value);
         this.router.navigate(['main']);
       }
-
     });
-
-
-
   }
 
+  comporbacionLogin(value:any){ 
+    
+    if (value['status'] == 0){ 
+      this.messageService.loginFail() 
+    } else {
+      this.messageService.mensajeLogin = true
+    }
+  }
+
+  cerrar(){ this.messageService.mensajeLogin = true }
 }

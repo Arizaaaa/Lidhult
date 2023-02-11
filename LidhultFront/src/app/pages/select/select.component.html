@@ -2,8 +2,13 @@
     <div class="borde">
         <span class="texto">¿Qué eres?</span>
     <div class="display-flex">
-        <button class="btn blue" routerLink="/register">Alumno</button>
-        <button class="btn blue" routerLink="/register">Professor</button>
+        <form action="" (ngSubmit)="prof()">
+            <button class="btn blue" routerLink="/register">Alumno</button>
+        </form>
+        <form action="" (ngSubmit)="stud()">
+            <button class="btn blue" routerLink="/register">Professor</button>
+        </form>
+
     </div>
     </div>
 </div>

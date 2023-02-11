@@ -1,0 +1,18 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+       <span><a (ngSubmit)="main()">Lidhult</a></span>
+       <span class="spacer"></span>
+       <form *ngIf="this.authService.status == 0" (ngSubmit)="register()">
+         <button mat-raised-button color="primary" >Register</button>
+       </form>
+       <form *ngIf="this.authService.status == 0" (ngSubmit)="login()">
+         <button mat-raised-button color="primary" >Login</button>
+       </form>
+       <form *ngIf="this.authService.status == 1" (ngSubmit)="main()">
+         <button mat-raised-button color="primary" >Perfil</button>
+       </form>
+       <form *ngIf="this.authService.status == 1" (ngSubmit)="logout()">
+         <button mat-raised-button color="primary" >Logout</button>
+       </form>
+    </mat-toolbar-row >
+ </mat-toolbar>

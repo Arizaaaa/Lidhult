@@ -1,10 +1,7 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-       <span><a href="/">Lidhult</a></span>
-       <span class="spacer"></span>
-       <a mat-button routerLink="/select">Register</a>
-       <a mat-button routerLink="/login">Login</a>
-       <a mat-button routerLink="/main">Perfil</a>
-    </mat-toolbar-row >
- </mat-toolbar>
+<app-header></app-header>
+<div class="warning" *ngIf="this.messageService.mensajeLogout == false">
+    Estas seguro que quieres cerrar sesion
+    <button mat-raised-button (click)="salir(1)" color="primary" >Si</button>
+    <button mat-raised-button (click)="salir(2)" color="primary" >No</button> 
+</div>
 <router-outlet></router-outlet>
