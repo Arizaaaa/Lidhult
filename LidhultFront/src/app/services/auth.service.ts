@@ -10,10 +10,12 @@ import { filter, Observable } from 'rxjs';
 export class AuthService {                                                                                                                                                
 
   readonly registeStudentrUrl = "http://localhost:8000/api/createStudent"
+  readonly registeProfessorUrl = "http://localhost:8000/api/createProfessor"
   readonly loginStudentUrl = "http://localhost:8000/api/login"
-  readonly loginProfessorUrl = "http://localhost:8000/api/"
 
   status = 0;
+  prof = true;
+  stud = true;
 
   constructor(public http: HttpClient) { }
 
@@ -32,10 +34,23 @@ export class AuthService {
         })
     );
   }
+  registerProfessor(professor:RegisterDataStudent) : Observable<RegisterDataStudent>{
+
+    return this.http.post<RegisterDataStudent>(this.registeProfessorUrl, professor).pipe(
+      filter((value: any) => {
+        let found = false;
+        if(value != null){
+          found = true
+        }else{
+          found = false
+        }
+        this.status = value['status'];
+        return found
+        })
+    );
+  }
 
   login(data:LoginData) : Observable<LoginData>{
-
-    console.log(data);
     
     return this.http.post<LoginData>(this.loginStudentUrl, data).pipe(
       filter((value: any) => {
@@ -49,6 +64,8 @@ export class AuthService {
         return found
         })
     );
-
   }
+
+  elegirProf(){ this.prof = false;}
+  elegirStud(){ this.stud = false;}
 }

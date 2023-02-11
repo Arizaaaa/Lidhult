@@ -1,4 +1,7 @@
-
+<div class="warning" *ngIf="this.messageService.mensajeLogin == false">
+  No a podido entrar compruebe si las credenciales son correctas
+  <button mat-raised-button (click)="cerrar()" color="warn" >X</button> 
+</div>
 <mat-card>
    <mat-card-content>
      <form (ngSubmit)="login()" [formGroup]="loginForm">
@@ -9,7 +12,7 @@
        <mat-form-field>
          <input matInput type="text" placeholder="Email or Nick" name="text" formControlName = "text">
          <mat-error>
-           Please provide a valid email address
+           Please provide a valid nick or email
          </mat-error>
        </mat-form-field>
        <mat-form-field>

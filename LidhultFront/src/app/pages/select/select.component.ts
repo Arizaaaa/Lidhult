@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService:AuthService,
+    private router: Router
+
+  ) { }
 
   ngOnInit(): void {
   }
 
+  prof(){
+    this.authService.elegirProf();
+  }
+  stud(){
+    this.authService.elegirStud();
+  }
 }
