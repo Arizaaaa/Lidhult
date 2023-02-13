@@ -112,10 +112,14 @@ class ProfessorController extends Controller
 
         } catch (Exception $e) {
 
+            $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
+                [$request->email, $request->nick]);
+
             DB::rollBack();
             return response()->json([
                 "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
+                "data" => $user
             ]);
         }    
         
