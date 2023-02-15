@@ -20,6 +20,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('nick')->unique();
             $table->string('password');
+            $table->foreignId('character_id')
+                ->nullable()
+                ->constrained('images')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->string('avatar')->default('/images/user_placeholder.png');
             $table->string('center');
             $table->timestamps();
         });
