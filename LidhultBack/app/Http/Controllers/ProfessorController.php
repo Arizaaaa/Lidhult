@@ -24,6 +24,12 @@ class ProfessorController extends Controller
                 'center' => 'required',
                 'image' => '',
             ]);
+
+            $user = DB::select('SELECT * FROM students WHERE nick = ? OR email = ?',
+            [$request->nick, $request->email]);
+
+            if ($user != null) { abort(500); }
+
             $professor = new Professor();
             $professor->name = $request->name;
             $professor->surnames = $request->surnames;

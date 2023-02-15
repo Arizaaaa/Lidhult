@@ -24,6 +24,12 @@ class StudentController extends Controller
                 'birth_date' => 'required',
                 'image' => '',
             ]);
+
+            $user = DB::select('SELECT * FROM professors WHERE nick = ? OR email = ?',
+            [$request->nick, $request->email]);
+
+            if ($user != null) { abort(500); }
+
             $student = new Student();
             $student->name = $request->name;
             $student->surnames = $request->surnames;
