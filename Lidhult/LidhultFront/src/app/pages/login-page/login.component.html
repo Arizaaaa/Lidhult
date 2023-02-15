@@ -1,27 +1,28 @@
-<div class="warning" *ngIf="this.messageService.mensajeLogin == false">
-  No a podido entrar compruebe si las credenciales son correctas
-  <button mat-raised-button (click)="cerrar()" color="warn" >X</button> 
+<div class="padre">
+  <div class="div3">
+    <div class="warning" *ngIf="this.messageService.mensajeLogin == false">
+      No a podido entrar compruebe si las credenciales son correctas
+      <button mat-raised-button (click)="cerrar()" color="warn">X</button>
+    </div>
+    <mat-card>
+      <mat-card-content>
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+          <h2>Log In</h2>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Email or Nick" name="text" formControlName="text">
+            <mat-error>
+              Please provide a valid nick or email
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Contraseña" name="contraseña" formControlName="password">
+            <mat-error>
+              Please provide a valid password
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary">Login</button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
-<mat-card>
-   <mat-card-content>
-     <form (ngSubmit)="login()" [formGroup]="loginForm">
-       <h2>Log In</h2>
-       <!-- <mat-error>
-         The username and password were not recognized
-       </mat-error> -->
-       <mat-form-field>
-         <input matInput type="text" placeholder="Email or Nick" name="text" formControlName = "text">
-         <mat-error>
-           Please provide a valid nick or email
-         </mat-error>
-       </mat-form-field>
-       <mat-form-field>
-         <input matInput type="password" placeholder="Contraseña" name="contraseña" formControlName = "password">
-         <mat-error>
-           Please provide a valid password
-         </mat-error>
-       </mat-form-field>
-       <button mat-raised-button color="primary" >Login</button>
-     </form>
-   </mat-card-content>
- </mat-card>

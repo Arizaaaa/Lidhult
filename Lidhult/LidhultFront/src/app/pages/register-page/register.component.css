@@ -1,3 +1,20 @@
+* {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+}
+
+.padre {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.div3 {
+  grid-area: 1 / 1 / 6 / 13;
+}
+
 mat-card {
   max-width: 400px;
   margin: 2em auto;
@@ -6,14 +23,18 @@ mat-card {
 mat-form-field {
   display: block;
 }
-.red{
+
+.red {
   color: red;
 }
-body{
+
+body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
 }
-.info, .warning{
+
+.info,
+.warning {
   border: 1px solid;
   margin: 10px 10px;
   padding: 15px 10px 15px 50px;
