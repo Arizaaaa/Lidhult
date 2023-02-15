@@ -1,9 +1,9 @@
-<div class="padre">
-  <div class="div3">
     <div class="warning" *ngIf="this.messageService.mensajeLogin == false">
       No a podido entrar compruebe si las credenciales son correctas
       <button mat-raised-button (click)="cerrar()" color="warn">X</button>
     </div>
+<div class="padre">
+  <div class="div3">
     <mat-card>
       <mat-card-content>
         <form (ngSubmit)="login()" [formGroup]="loginForm">
