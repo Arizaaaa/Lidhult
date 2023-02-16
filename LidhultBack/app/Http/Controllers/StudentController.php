@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Professor;
 use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,6 +24,13 @@ class StudentController extends Controller
                 'password' => 'required',
                 'birth_date' => 'required',
             ]);
+            
+            if(Professor::where('email', '=', $request->email)->exists()
+            || Professor::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+
             $student = new Student();
             $student->name = $request->name;
             $student->surnames = $request->surnames;
@@ -32,6 +40,7 @@ class StudentController extends Controller
             $student->birth_date = $request->birth_date;
             $student->save();
             DB::commit();
+
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
             [$student->email, $student->nick]);
             return response()->json([
@@ -189,7 +198,7 @@ class StudentController extends Controller
 
         try{
 
-            $request->validate([
+            $request->validate([    
                 'id' => '',
                 'name' => '',
                 'surnames' => '',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Professor;
+use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,13 @@ class ProfessorController extends Controller
                 'password' => 'required',
                 'birth_date' => 'required',
             ]);
+
+            if(Student::where('email', '=', $request->email)->exists()
+            || Student::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+
             $professor = new Professor();
             $professor->name = $request->name;
             $professor->surnames = $request->surnames;
