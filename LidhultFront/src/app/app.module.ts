@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './pages/login-page/login.component';
-import { MainComponent } from './pages/main-page/main.component';
+import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,7 +31,7 @@ import { HeaderComponent } from './pages/header/header.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MainComponent,
+    PerfilComponent,
     SelectComponent,
     HeaderComponent
   ],

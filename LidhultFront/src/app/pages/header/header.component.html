@@ -24,7 +24,7 @@
   <div class="div1">
     <header class="header">
       <div class="logo">
-        <span (ngSubmit)="main()">Lidhult</span>
+        <span >Lidhult</span>
       </div>
       <!-- <span class="spacer"></span> -->
       <nav>
@@ -36,7 +36,7 @@
             <a (click)="login()">Login</a>
           </li>
           <li *ngIf="this.authService.status == 1">
-            <a (click)="main()">Perfil</a>
+            <a (click)="perfil()">Perfil</a>
           </li>
           <li *ngIf="this.authService.status == 1">
             <a (click)="logout()">Logout</a>
