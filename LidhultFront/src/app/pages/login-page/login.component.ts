@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
       next: (value: LoginData) => {
         this.datos = value;
         this.comporbacionLogin(value);
-        this.router.navigate(['perfil']);
+        this.router.navigate(['main']);
       }
     });
   }
 
-  comporbacionLogin(value:any){ g
+  comporbacionLogin(value:any){ 
     
     if (value['status'] == 0){ 
       this.messageService.loginFail() 

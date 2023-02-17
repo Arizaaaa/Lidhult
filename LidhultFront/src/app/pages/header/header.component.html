@@ -36,6 +36,9 @@
             <a (click)="login()">Login</a>
           </li>
           <li *ngIf="this.authService.status == 1">
+            <a (click)="ranking()">Ranking</a>
+          </li>
+          <li *ngIf="this.authService.status == 1">
             <a (click)="perfil()">Perfil</a>
           </li>
           <li *ngIf="this.authService.status == 1">

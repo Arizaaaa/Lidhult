@@ -22,6 +22,8 @@ export class HeaderComponent implements OnInit {
   
   register(){this.router.navigate(['register']);}
 
+  ranking(){this.router.navigate(['ranking']); }
+
   perfil(){this.router.navigate(['perfil']);}
 
   logout(){this.messagesService.logoutMessage();}

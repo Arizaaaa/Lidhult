@@ -7,6 +7,10 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login-page/login.component';
 import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
+import { SelectComponent } from './pages/select/select.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { RankingComponent } from './ranking/ranking.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,8 +24,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { SelectComponent } from './pages/select/select.component';
-import { HeaderComponent } from './pages/header/header.component';
+
 
 
 
@@ -33,7 +36,8 @@ import { HeaderComponent } from './pages/header/header.component';
     RegisterComponent,
     PerfilComponent,
     SelectComponent,
-    HeaderComponent
+    HeaderComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
