@@ -31,12 +31,14 @@
               <label class="small mb-1" for="inputEmailAddress">Email</label>
               <input class="form-control" formControlName = "email" id="inputEmailAddress" type="email">
             </div>
-            <mat-form-field appearance="fill" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
+            <mat-form-field appearance="fill" *ngIf="this.authService.user.data[0]['birth_date'] != undefined" hidden>
               <input matInput [matDatepicker]="picker" formControlName="date"/>
-              <mat-hint>MM/DD/YYYY</mat-hint>
-              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker> 
             </mat-form-field>
+            <label class="small mb-1" *ngIf="this.authService.user.data[0]['birth_date'] != undefined"> Fecha de nacimiento:</label>
+            <p *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
+              {{this.date}}
+            </p>
             <div class="mb-3" *ngIf="this.authService.user.data[0]['center'] != undefined">
               <label class="small mb-1" for="inputEmailAddress">Centro</label>
               <input class="form-control" formControlName = "center" id="inputEmailAddress" type="center">

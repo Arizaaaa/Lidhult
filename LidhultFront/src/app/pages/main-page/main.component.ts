@@ -3,6 +3,7 @@ import { RegisterDataStudent } from './../../model/register-data-student';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-main',
@@ -10,6 +11,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
+  fecha = new Date();
+  date = '';
 
   constructor(
     public authService: AuthService,
@@ -41,16 +45,17 @@ export class MainComponent implements OnInit {
         password: "",
       });
     } else {
-      let fecha = new Date(this.authService.user.data[0]['birth_date'])
+      this.fecha = new Date(this.authService.user.data[0]['birth_date'])
       this.updateForm.setValue({
         
         name: this.authService.user.data[0]['name'],
         surnames: this.authService.user.data[0]['surnames'],
         email: this.authService.user.data[0]['email'],
-        date: fecha,
+        date: this.fecha,
         center: "",
         password: "",
       });
+      this.date = formatDate(new Date(this.authService.user.data[0]['birth_date']),'yyyy-MM-dd','en-US')
     }
   }
 

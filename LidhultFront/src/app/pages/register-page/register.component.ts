@@ -59,7 +59,9 @@ export class RegisterComponent implements OnInit {
       if(val === confirmVal){
         return null;
       }
-      return {passwordMismatchError:true}
+      if (confirmVal != '') { return {passwordMismatchError:true }
+ 
+      } else { return {passwordMismatchError:false}}
     }
 
   }
