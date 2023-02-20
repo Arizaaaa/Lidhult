@@ -1,4 +1,4 @@
-    <div class="warning" *ngIf="this.messageService.mensajeLogin == false">
+<!--     <div class="warning" *ngIf="this.messageService.mensajeLogin == false">
       No a podido entrar compruebe si las credenciales son correctas
       <button mat-raised-button (click)="cerrar()" color="warn">X</button>
     </div>
@@ -25,4 +25,32 @@
       </mat-card-content>
     </mat-card>
   </div>
-</div>
+</div> -->
+
+<!-- Opcion 1 -->
+<!-- <div class="padre">
+  <div class="div3">
+    <div class="center">
+      <div class="borde">
+        <h1>Login</h1>
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
+          <div class="txt_field">
+            <input matInput type="text" name="text" formControlName="text">
+            <span></span>
+            <label>Email or Nick</label>
+          </div>
+          <div class="txt_field">
+            <input matInput type="password" name="contraseña" formControlName="password">
+            <span></span>
+            <label>Contraseña</label>
+          </div>
+          <input type="submit" value="Login">
+          <div class="register_link">
+            Crear una cuenta
+            <a (click)="register()">Signup</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {}
 
+  register(){this.router.navigate(['register']);}
+
   login(){
     this.datos['dato'] =  this.loginForm.controls['text'].value;
     this.datos['password'] =  this.loginForm.controls['password'].value;
