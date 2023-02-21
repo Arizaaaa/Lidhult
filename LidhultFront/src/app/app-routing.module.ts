@@ -5,7 +5,7 @@ import { LoginComponent } from './pages/login-page/login.component';
 import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
-import { RankingComponent } from './ranking/ranking.component';
+import { RankingComponent } from './pages/ranking-page/ranking.component';
 
 const routes: Routes = [
 

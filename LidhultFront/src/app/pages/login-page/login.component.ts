@@ -14,48 +14,54 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
-      text: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-    });
+    text: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  });
 
-  datos : LoginData = {
+  datos: LoginData = {
     dato: null,
     password: null
   };
-  
-  user:RegisterDataStudent = {nick: null,name: null,surnames: null,email: null,password: null,birth_date: null}
-  constructor(  
+
+  user: RegisterDataStudent = { nick: null, name: null, surnames: null, email: null, password: null, birth_date: null }
+  constructor(
     public authService: AuthService,
     public messageService: MessagesService,
     private router: Router
   ) { }
-  
-  ngOnInit(): void {}
 
-  register(){this.router.navigate(['register']);}
+  ngOnInit(): void { }
 
-  login(){
-    this.datos['dato'] =  this.loginForm.controls['text'].value;
-    this.datos['password'] =  this.loginForm.controls['password'].value;
+  register() { this.router.navigate(['register']); }
+
+  login() {
+    this.datos['dato'] = this.loginForm.controls['text'].value;
+    this.datos['password'] = this.loginForm.controls['password'].value;
 
     this.authService.login(this.datos).subscribe({
 
-      next: (value: LoginData) => {
+      next: (value: any) => {
         this.datos = value;
         this.comporbacionLogin(value);
-        this.router.navigate(['main']);
+
+        if (value['status'] == 0) {
+          this.router.navigate(['login']);
+        } else {
+          this.router.navigate(['main']);
+        }
+
       }
     });
   }
 
-  comporbacionLogin(value:any){ 
-    
-    if (value['status'] == 0){ 
-      this.messageService.loginFail() 
+  comporbacionLogin(value: any) {
+
+    if (value['status'] == 0) {
+      this.messageService.loginFail()
     } else {
       this.messageService.mensajeLogin = true
     }
   }
 
-  cerrar(){ this.messageService.mensajeLogin = true }
+  cerrar() { this.messageService.mensajeLogin = true }
 }

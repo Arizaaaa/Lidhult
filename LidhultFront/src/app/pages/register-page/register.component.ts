@@ -37,6 +37,8 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {}
 
+  login(){this.router.navigate(['perfil']); }
+
   nickValidator(){
 
     let specialCaracters = '!"·$%&/()=?¿^*Ç¨;:|@#~¬¡´`+-.,><}{][\ºª'

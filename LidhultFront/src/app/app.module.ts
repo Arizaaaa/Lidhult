@@ -9,7 +9,7 @@ import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
 import { HeaderComponent } from './pages/header/header.component';
-import { RankingComponent } from './ranking/ranking.component';
+import { RankingComponent } from './pages/ranking-page/ranking.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
