@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignId('character_id')
                 ->nullable()
-                ->constrained('images')
+                ->constrained('characters')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('avatar')->default('/images/user_placeholder.png');

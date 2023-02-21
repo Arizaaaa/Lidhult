@@ -13,20 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('professors', function (Blueprint $table) {
+        Schema::create('rankings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('surnames');
-            $table->string('email')->unique();
-            $table->string('nick')->unique();
-            $table->string('password');
-            $table->foreignId('character_id')
+            $table->foreignId('professor_id')
                 ->nullable()
-                ->constrained('images')
+                ->constrained('professors')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('avatar')->default('/images/user_placeholder.png');
-            $table->string('center');
+            $table->string('name');
+            $table->string('code');
             $table->timestamps();
         });
     }
@@ -38,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professors');
+        Schema::dropIfExists('rankings');
     }
 };

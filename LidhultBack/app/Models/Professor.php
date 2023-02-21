@@ -15,6 +15,8 @@ class Professor extends Model
         'email',
         'nick',
         'password',
+        'character_id',
+        'avatar',
         'center',
     ];
 
