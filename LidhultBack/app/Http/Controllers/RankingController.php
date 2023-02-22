@@ -2,28 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class Ranking extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    
+    public function create(Request $request) { // Crea un ranking
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        try{
+            
+            DB::beginTransaction();
+            $request->validate([
+                'professor_id' => 'required',
+                'name' => 'required',
+                'code' => 'required',
+            ]);
+
+            $ranking = new Ranking();
+            $ranking->professor_id = $request->name;
+            $ranking->name = $request->surnames;
+            $ranking->code = mt_rand(10000000, 99999999);
+            $ranking->save();
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha insertado!",
+                "data" => $ranking,
+            ]);
+
+        } catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha podido insertar! + $e",
+            ]);
+        }
     }
 
     /**
