@@ -35,6 +35,15 @@
     background: white;
 }
 
+@media only screen and (max-width: 1500px) {
+    .display-flex {
+        gap: 3rem;
+        display: grid;
+        place-items: center;
+        justify-content: center;
+    }
+  }
+
 .borde {
 
     border-radius: 4px;
@@ -78,3 +87,4 @@
 .blue:hover {
     background-color: #2d3563;
 }
+
