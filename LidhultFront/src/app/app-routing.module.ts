@@ -6,9 +6,6 @@ import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
 import { RankingComponent } from './pages/ranking-page/ranking.component';
-import { MainComponent } from './pages/main-page/main.component';
-import { RegisterComponent } from './pages/register-page/register.component';
-import { SelectComponent } from './pages/select/select.component';
 
 const routes: Routes = [
 
@@ -22,9 +19,6 @@ const routes: Routes = [
   component: RankingComponent},
   {path: 'perfil',
   component: PerfilComponent,
-  {path: 'main',
-  component: MainComponent,
-
   canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }

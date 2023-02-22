@@ -12,8 +12,6 @@ import { SelectComponent } from './pages/select/select.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { RankingComponent } from './pages/ranking-page/ranking.component';
 
-import { MainComponent } from './pages/main-page/main.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,8 +26,6 @@ import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
-import { SelectComponent } from './pages/select/select.component';
-import { HeaderComponent } from './pages/header/header.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +35,7 @@ import { HeaderComponent } from './pages/header/header.component';
     PerfilComponent,
     SelectComponent,
     HeaderComponent,
-    RankingComponent
-    MainComponent,
+    RankingComponent,
     SelectComponent,
     HeaderComponent
   ],
