@@ -1,4 +1,7 @@
-<mat-toolbar color="primary">
+
+<!-- Version main -->
+<!-- <mat-toolbar color="primary">
+
     <mat-toolbar-row>
        <span><a (ngSubmit)="main()">Lidhult</a></span>
        <span class="spacer"></span>
@@ -15,4 +18,43 @@
          <button mat-raised-button color="primary" >Logout</button>
        </form>
     </mat-toolbar-row >
+
+ </mat-toolbar> -->
+
+<!-- Opcion1 -->
+
+<div class="padre">
+  <div class="div1">
+    <header class="header">
+      <div class="logo">
+        <span >Lidhult</span>
+      </div>
+      <!-- <span class="spacer"></span> -->
+      <nav>
+        <ul class="nav-links">
+          <li *ngIf="this.authService.status == 0">
+            <a (click)="register()">Register</a>
+          </li>
+          <li *ngIf="this.authService.status == 0">
+            <a (click)="login()">Login</a>
+          </li>
+          <li *ngIf="this.authService.status == 1">
+            <a (click)="ranking()">Ranking</a>
+          </li>
+          <li *ngIf="this.authService.status == 1">
+            <a (click)="perfil()">Perfil</a>
+          </li>
+          <li *ngIf="this.authService.status == 1">
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<!-- Opcion2 -->
+<!-- Opcion3 -->
+
  </mat-toolbar>
+

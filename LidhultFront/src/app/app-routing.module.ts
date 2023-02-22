@@ -2,6 +2,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login-page/login.component';
+import { PerfilComponent } from './pages/perfil-page/perfil.component';
+import { RegisterComponent } from './pages/register-page/register.component';
+import { SelectComponent } from './pages/select/select.component';
+import { RankingComponent } from './pages/ranking-page/ranking.component';
 import { MainComponent } from './pages/main-page/main.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
@@ -14,8 +18,13 @@ const routes: Routes = [
   component: SelectComponent},
   {path: 'register',
   component:  RegisterComponent},
+  {path: 'ranking',
+  component: RankingComponent},
+  {path: 'perfil',
+  component: PerfilComponent,
   {path: 'main',
   component: MainComponent,
+
   canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }

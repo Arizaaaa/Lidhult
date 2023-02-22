@@ -1,55 +1,126 @@
-<div class="warning" *ngIf="this.messageService.mensajeRegister == false">
-    El email o el nick ya existen, por favor elija otro, el nick no puede contener caracteres especiales.
-    <button mat-raised-button (click)="cerrar()" color="warn" >X</button> 
-</div>
+
 <app-select *ngIf="this.authService.prof == true && this.authService.stud == true"></app-select>
-<mat-card *ngIf="this.authService.prof == false || this.authService.stud == false">
-    <mat-card-content>
-      <form (ngSubmit)="register()" [formGroup]="registerForm">
-        <h2>Register</h2>
-        <mat-form-field>
-            <mat-label>Nick</mat-label>
-            <input matInput placeholder="Nick" name="nick" formControlName = "nick">
-        </mat-form-field>
-        <mat-error *ngIf="registerForm.controls['name'].hasError('invalidName')">
-            Special characters not allowed!
-        </mat-error>
-        <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" name="email" formControlName = "email">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Contraseña</mat-label>
-            <input matInput placeholder="Contraseña" name="contraseña" formControlName = "con">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Confirma la contraseña</mat-label>
-            <input matInput placeholder="Contraseña" name="contraseña" formControlName = "conValidate">
-        </mat-form-field>
-        <div *ngIf="registerForm.errors?.['passwordMismatchError']">
-            <small class="red">Password mismatch</small>
+<!-- <div class="padre">
+    <div class="div3">
+        <div class="warning" *ngIf="this.messageService.mensajeRegister == false">
+            El email o el nick ya existen, por favor elija otro, el nick no puede contener caracteres especiales.
+            <button mat-raised-button (click)="cerrar()" color="warn">X</button>
         </div>
-        <mat-form-field>
-            <mat-label>Nombre</mat-label>
-            <input matInput placeholder="Nombre" name="nombre" formControlName = "name">
-        </mat-form-field>
-        <mat-form-field class="width">
-            <mat-label>Apellido</mat-label>
-            <input matInput placeholder="Apellido" name="apellido" formControlName = "surname">
-        </mat-form-field>
-        <mat-form-field class="width" *ngIf="this.authService.stud == false">
-            <mat-label>Centro</mat-label>
-            <input matInput placeholder="Ilerna" name="centro" formControlName = "date">
-        </mat-form-field>
-        <mat-form-field *ngIf="this.authService.prof == false">
-            <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" placeholder="Elija una fecha" formControlName = "date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-card-actions>
-            <button mat-raised-button color="primary">REGISTER</button>
-        </mat-card-actions>
-      </form>
-    </mat-card-content>
-  </mat-card>
+        <mat-card *ngIf="this.authService.prof == false || this.authService.stud == false">
+            <mat-card-content>
+                <form (ngSubmit)="register()" [formGroup]="registerForm">
+                    <h2>Register</h2>
+                    <mat-form-field>
+                        <mat-label>Nick</mat-label>
+                        <input matInput placeholder="Nick" name="nick" formControlName="nick">
+                    </mat-form-field>
+                    <mat-error *ngIf="registerForm.controls['name'].hasError('invalidName')">
+                        Special characters not allowed!
+                    </mat-error>
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Email" name="email" formControlName="email">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput placeholder="Contraseña" name="contraseña" formControlName="con">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Confirma la contraseña</mat-label>
+                        <input matInput placeholder="Contraseña" name="contraseña" formControlName="conValidate">
+                    </mat-form-field>
+                    <div *ngIf="registerForm.errors?.['passwordMismatchError']">
+                        <small class="red">Password mismatch</small>
+                    </div>
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombre" name="nombre" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field class="width">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput placeholder="Apellido" name="apellido" formControlName="surname">
+                    </mat-form-field>
+                    <mat-form-field class="width" *ngIf="this.authService.stud == false">
+                        <mat-label>Centro</mat-label>
+                        <input matInput placeholder="Ilerna" name="centro" formControlName="date">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="this.authService.prof == false">
+                        <mat-label>Fecha de nacimiento</mat-label>
+                        <input matInput [matDatepicker]="picker" placeholder="Elija una fecha" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary">REGISTER</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div> -->
+
+<div class="padre" *ngIf="this.authService.prof == false || this.authService.stud == false">
+    <div class="div3">
+        <div class="warning" *ngIf="this.messageService.mensajeRegister == false">
+            El email o el nick ya existen, por favor elija otro, el nick no puede contener caracteres especiales.
+            <button mat-raised-button (click)="cerrar()" color="warn">X</button>
+        </div>
+        <div class="center">
+            <div class="borde">
+                <form (ngSubmit)="register()" [formGroup]="registerForm">
+                    <h1>Register</h1>
+                    <div class="txt_field">
+                        <input matInput name="nick" formControlName="nick">
+                        <span></span>
+                        <label>Nick</label>
+                    </div>
+                    <mat-error *ngIf="registerForm.controls['name'].hasError('invalidName')">
+                        Special characters not allowed!
+                    </mat-error>
+                    <div class="txt_field">
+                        <input matInput name="email" formControlName="email">
+                        <span></span>
+                        <label>Email</label>
+                    </div>
+                    <div class="txt_field">
+                        <input matInput name="contraseña" formControlName="con">
+                        <span></span>
+                        <label>Contraseña</label>
+                    </div>
+                    <div class="txt_field">
+                        <input matInput name="contraseña" formControlName="conValidate">
+                        <span></span>
+                        <label>Confirma la contraseña</label>
+                    </div>
+                    <div *ngIf="registerForm.errors?.['passwordMismatchError']">
+                        <small class="red">Password mismatch</small>
+                    </div>
+                    <div class="txt_field">
+                        <input matInput name="nombre" formControlName="name">
+                        <span></span>
+                        <label>Nombre</label>
+                    </div>
+                    <div class="txt_field">
+                        <input matInput name="apellido" formControlName="surname">
+                        <span></span>
+                        <label>Apellido</label>
+                    </div>
+                    <div class="txt_field" *ngIf="this.authService.stud == false">
+                        <input matInput name="centro" formControlName="date">
+                        <span></span>
+                        <label>Centro</label>
+                    </div>
+                    <div class="txt_field" *ngIf="this.authService.prof == false">
+                        <input matInput type="date" formControlName="date" >
+                        <span></span>
+                    </div>
+                    <input type="submit" value="Register">
+                    <div class="register_link">
+                        ¿Ya tienes una cuenta?
+                        <a (click)="login()">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

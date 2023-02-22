@@ -18,11 +18,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){this.router.navigate(['main']); }
+
+  login(){this.router.navigate(['perfil']); }
   
   register(){this.router.navigate(['register']);}
 
-  main(){this.router.navigate(['main']);}
+  ranking(){this.router.navigate(['ranking']); }
+
+  perfil(){this.router.navigate(['perfil']);}
 
   logout(){this.messagesService.logoutMessage();}
 

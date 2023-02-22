@@ -37,6 +37,9 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {}
 
+
+  login(){this.router.navigate(['perfil']); }
+
   nickValidator(){
 
     let specialCaracters = '!"·$%&/()=?¿^*Ç¨;:|@#~¬¡´`+-.,><}{][\ºª'
@@ -59,9 +62,9 @@ export class RegisterComponent implements OnInit {
       if(val === confirmVal){
         return null;
       }
-      if (confirmVal != '') { return {passwordMismatchError:true }
- 
-      } else { return {passwordMismatchError:false}}
+
+      return {passwordMismatchError:true}
+
     }
 
   }
