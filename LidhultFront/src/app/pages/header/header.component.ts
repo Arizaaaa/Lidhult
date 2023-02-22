@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   login(){this.router.navigate(['perfil']); }
   
   register(){this.router.navigate(['register']);}

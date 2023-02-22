@@ -1,3 +1,4 @@
+
 /* * {
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
@@ -35,6 +36,7 @@ body {
 
 .info,
 .warning {
+
   border: 1px solid;
   margin: 10px 10px;
   padding: 15px 10px 15px 50px;
@@ -46,6 +48,7 @@ body {
   color: #9F6000;
   background-color: #FEEFB3;
   background-image: url('https://i.imgur.com/Z8q7ww7.png');
+
 }
 
 /* Opcion 1 */
@@ -176,4 +179,4 @@ input[type="submit"]:hover {
 input[type="date"]{
 color: #adadad;
 }
- 
+

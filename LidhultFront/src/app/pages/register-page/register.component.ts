@@ -37,6 +37,7 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {}
 
+
   login(){this.router.navigate(['perfil']); }
 
   nickValidator(){
@@ -61,7 +62,9 @@ export class RegisterComponent implements OnInit {
       if(val === confirmVal){
         return null;
       }
+
       return {passwordMismatchError:true}
+
     }
 
   }

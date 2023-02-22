@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm = new FormGroup({
+
     text: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   user: RegisterDataStudent = { nick: null, name: null, surnames: null, email: null, password: null, birth_date: null }
   constructor(
+
     public authService: AuthService,
     public messageService: MessagesService,
     private router: Router
@@ -58,10 +60,12 @@ export class LoginComponent implements OnInit {
 
     if (value['status'] == 0) {
       this.messageService.loginFail()
+
     } else {
       this.messageService.mensajeLogin = true
     }
   }
 
   cerrar() { this.messageService.mensajeLogin = true }
+
 }

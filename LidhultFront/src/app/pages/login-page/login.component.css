@@ -1,3 +1,4 @@
+
 .padre {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -11,6 +12,7 @@
 }
 
 /* mat-card {
+
   max-width: 400px;
   margin: 2em auto;
   text-align: center;
@@ -18,12 +20,16 @@
 
 mat-form-field {
   display: block;
+
   font-family: 'Nunito', sans-serif;
   font-size: 20px;
 }
- */
-.info,
-.warning {
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+}
+.info, .warning{
   border: 1px solid;
   margin: 10px 10px;
   padding: 15px 10px 15px 50px;
@@ -35,6 +41,7 @@ mat-form-field {
   color: #9F6000;
   background-color: #FEEFB3;
   background-image: url('https://i.imgur.com/Z8q7ww7.png');
+
 }
 
 /* Opcion 1 */
@@ -160,5 +167,3 @@ input[type="submit"]:hover {
   cursor: pointer;
   text-decoration: underline;
 }
-
-
