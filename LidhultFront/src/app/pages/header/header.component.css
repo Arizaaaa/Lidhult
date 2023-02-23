@@ -42,7 +42,8 @@
 }
  */
 .header {
-  background-color: #1b3039;
+  /* background-color: #1b3039; */
+/*   background: linear-gradient(200deg, #2980b9, #8e44ad); */
   display: flex;
   justify-content: space-between;
   align-items: center;
