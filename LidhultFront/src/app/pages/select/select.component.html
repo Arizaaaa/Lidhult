@@ -1,17 +1,14 @@
-
 <div class="padre">
     <div class="div3">
         <div class="medio">
-            <div class="borde">
-                <span class="texto">¿Qué eres?</span>
-                <div class="display-flex">
-                    <form (ngSubmit)="prof()">
-                        <button class="btn blue" routerLink="/register">Alumno</button>
-                    </form>
-                    <form (ngSubmit)="stud()">
-                        <button class="btn blue" routerLink="/register">Professor</button>
-                    </form>
-                </div>
+            <span class="texto">¿Qué eres?</span>
+            <div class="display-flex">
+                <form (ngSubmit)="prof()">
+                    <button class="btn" routerLink="/register">Alumno</button>
+                </form>
+                <form (ngSubmit)="stud()">
+                    <button class="btn" routerLink="/register">Professor</button>
+                </form>
             </div>
         </div>
 
