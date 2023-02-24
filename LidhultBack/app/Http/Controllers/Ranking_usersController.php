@@ -2,46 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ranking;
+use App\Models\Ranking_user;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class RankingController extends Controller
+class Ranking_usersController extends Controller
 {
-    
-    public function create(Request $request) { // Crea un ranking
 
+    public function create(Request $request)
+    {
         try{
             
             DB::beginTransaction();
             $request->validate([
-                'professor_id' => 'required',
-                'name' => 'required',
-                'code' => '',
+                'ranking_id' => 'required',
+                'student_id' => 'required',
+                'puntuation' => '',
             ]);
 
-            $ranking = new Ranking();
-            $ranking->professor_id = $request->professor_id;
-            $ranking->name = $request->name;
-
-            do{
-
-                $ranking->code = mt_rand(10000000, 99999999);
-
-                $user = DB::select('select code FROM rankings WHERE code = ?',
-                [$ranking->code]);
-                
-            } while ($user != null);
-
-            $ranking->save();
+            $user = new Ranking_user();
+            $user->ranking_id = $request->ranking_id;
+            $user->student_id = $request->student_id;
+            $user->puntuation = 0;
+            $user->save();
             DB::commit();
 
             return response()->json([
                 "status" => 1,
                 "msg" => "Se ha insertado!",
-                "data" => $ranking,
+                "data" => $user,
             ]);
 
         } catch (Exception $e) {
@@ -52,6 +42,35 @@ class RankingController extends Controller
                 "msg" => "No se ha podido insertar! + $e",
             ]);
         }
+    }
+
+    public function index(Request $request){
+
+        try{
+            
+            $ranking_users = DB::select('SELECT * 
+                                        FROM students s
+                                        JOIN ranking_users r
+                                        WHERE s.id = r.student_id
+                                        AND r.ranking_id = ?',
+            [$request->ranking_id]);
+
+            if ($ranking_users == null) {abort(500);}
+
+            return response()->json([
+                "status" => 1,
+                "data" => $ranking_users,
+            ]);
+
+        } catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha encontrado! + $e",
+            ]);
+        }
+
     }
 
     /**

@@ -21,7 +21,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('name');
-            $table->string('code');
+            $table->integer('code');
             $table->timestamps();
         });
     }
