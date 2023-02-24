@@ -15,6 +15,8 @@ class Student extends Model
         'email',
         'nick',
         'password',
+        'character_id',
+        'avatar',
         'birth_date',
     ];
 }

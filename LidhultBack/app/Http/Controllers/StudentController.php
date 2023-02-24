@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Professor;
 use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
@@ -23,6 +24,13 @@ class StudentController extends Controller
                 'password' => 'required',
                 'birth_date' => 'required',
             ]);
+            
+            if(Professor::where('email', '=', $request->email)->exists()
+            || Professor::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+
             $student = new Student();
             $student->name = $request->name;
             $student->surnames = $request->surnames;
@@ -32,6 +40,7 @@ class StudentController extends Controller
             $student->birth_date = $request->birth_date;
             $student->save();
             DB::commit();
+
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
             [$student->email, $student->nick]);
             return response()->json([
@@ -125,11 +134,71 @@ class StudentController extends Controller
         
     }
 
+    public function avatar(Request $request) {
+
+        try{
+
+            DB::beginTransaction();
+            $request->validate([
+                'dato' => 'required',
+                'avatar' => 'required',
+            ]);
+
+            DB::update('update students set avatar = ? WHERE email = ? OR nick = ?',
+            [$request->avatar, $request->dato, $request->dato]);
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha actualizado!",
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "No se ha podido actualizar + $e!",
+            ]);
+
+        }
+
+    }
+
+    public function character(Request $request) {
+
+        try{
+
+            DB::beginTransaction();
+            $request->validate([
+                'dato' => 'required',
+                'character' => 'required',
+            ]);
+
+            DB::update('update students set character_id = ? WHERE email = ? OR nick = ?',
+            [$request->character, $request->dato, $request->dato]);
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha actualizado!",
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "No se ha podido actualizar + $e!",
+            ]);
+
+        }
+
+    }
+
     public function read(Request $request) { // Lee un estudiante
 
         try{
 
-            $request->validate([
+            $request->validate([    
                 'id' => '',
                 'name' => '',
                 'surnames' => '',
