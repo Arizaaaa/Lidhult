@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { LoginComponent } from './pages/login-page/login.component';
-
 import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { RankingComponent } from './pages/ranking-page/ranking.component';
+import { CharacterComponent } from './pages/character-page/character.component';
+import { HomeComponent } from './pages/home-page/home.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -27,6 +28,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,9 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     HeaderComponent,
     RankingComponent,
     SelectComponent,
-    HeaderComponent
+    HeaderComponent,
+    CharacterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { PerfilComponent } from './pages/perfil-page/perfil.component';
 import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
 import { RankingComponent } from './pages/ranking-page/ranking.component';
+import { HomeComponent } from './pages/home-page/home.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,11 @@ const routes: Routes = [
   {path: 'register',
   component:  RegisterComponent},
   {path: 'ranking',
-  component: RankingComponent},
+  component: RankingComponent,
+  canActivate: [AuthGuard]},
+  {path: 'home',
+  component: HomeComponent, 
+  canActivate: [AuthGuard]},
   {path: 'perfil',
   component: PerfilComponent,
   canActivate: [AuthGuard]
