@@ -7,6 +7,7 @@ import { RegisterComponent } from './pages/register-page/register.component';
 import { SelectComponent } from './pages/select/select.component';
 import { RankingComponent } from './pages/ranking-page/ranking.component';
 import { HomeComponent } from './pages/home-page/home.component';
+import { CharacterComponent } from './pages/character-page/character.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,9 @@ const routes: Routes = [
   component: SelectComponent},
   {path: 'register',
   component:  RegisterComponent},
+  {path: 'character',
+  component: CharacterComponent, 
+  /* canActivate: [AuthGuard] */},
   {path: 'ranking',
   component: RankingComponent,
   canActivate: [AuthGuard]},
