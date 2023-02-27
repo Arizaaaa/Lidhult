@@ -130,7 +130,7 @@ input[type="submit"]:hover {
   text-decoration: none;
 }
 
-.register_link a:hover {
+.register_link a:hover{
   cursor: pointer;
   text-decoration: underline;
 }

@@ -12,4 +12,14 @@ export class CharacterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // active(id:string) {
+
+  //   for () {}
+
+  //   ('img').classList.remove('img');
+  //   img.classList.remove('img');
+  //   img.classList.add('active');
+    
+  // }
+
 }

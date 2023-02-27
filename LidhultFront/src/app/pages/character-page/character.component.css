@@ -21,51 +21,36 @@
     place-items: center;
 }
 
-section {
+.characters {
     display: flex;
     width: 750px;
     height: 512px;
 }
 
-section img {
+.img2 {
     width: 0px;
     flex-grow: 1;
     object-fit: cover;
+}
+
+.img {
     opacity: .8;
-    transition: .5s ease;
+    filter: brightness(10%);
 }
 
 section img:hover {
-    cursor: crosshair;
-    width: 400px;
-    opacity: 1;
-    filter: contrast(120%);
+    cursor: pointer;
 }
 
+.active {
+    transition: .5s ease;
+    width: 500px;
+    opacity: 100;
+    filter: contrast(120%);
+    filter: brightness(100%)
+}
 
-/* .container {
+.rank1 {
     display: flex;
     gap: 10px;
 }
-
-.card {
-    width: 300px;
-    height: 400px;
-    background-color: #f5e237;
-    border-radius: 10px;
-    transition: 300ms ease-in-out;
-    box-shadow: 0 5px 10px 0 #0a0a0a7c;
-}
-
-.card+.card{
-    margin-left: -10%;
-}
-
-.card:hover {
-    transform: rotate(-6deg);
-}
-
-.card:hover~.card {
-    z-index: 1;
-    translate: 250px;
-} */
