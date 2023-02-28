@@ -27,6 +27,8 @@ export class HeaderComponent implements OnInit {
 
   perfil(){this.router.navigate(['perfil']);}
 
+  home(){this.router.navigate(['home']); }
+
   logout(){this.messagesService.logoutMessage();}
 
 }

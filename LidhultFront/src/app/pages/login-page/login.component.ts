@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         if (value['status'] == 0) {
           this.router.navigate(['login']);
         } else {
-          this.router.navigate(['main']);
+          this.router.navigate(['character']);
         }
 
       }
