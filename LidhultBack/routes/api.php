@@ -29,7 +29,9 @@ Route::post('updateStudent', [StudentController::class, 'update']);
 Route::post('readStudent', [StudentController::class, 'read']);
 Route::post('login', [LoginController::class, 'login']);
 Route::post('createRanking', [RankingController::class, 'create']);
-Route::post('indexUsers', [Ranking_usersController::class, 'index']);
+Route::get('showRanking/{id}', [RankingController::class, 'show']);
+Route::post('joinRanking', [Ranking_usersController::class, 'joinRanking']);
+Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']);
 Route::post('createRanking_user', [Ranking_usersController::class, 'create']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
