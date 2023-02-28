@@ -44,7 +44,7 @@ class Ranking_usersController extends Controller
         }
     }
 
-    public function index(Request $request){
+    public function index($id){
 
         try{
             
@@ -53,7 +53,7 @@ class Ranking_usersController extends Controller
                                         JOIN ranking_users r
                                         WHERE s.id = r.student_id
                                         AND r.ranking_id = ?',
-            [$request->ranking_id]);
+            [$id]);
 
             if ($ranking_users == null) {abort(500);}
 
@@ -72,6 +72,44 @@ class Ranking_usersController extends Controller
         }
 
     }
+    
+    public function joinRanking(Request $request){
+
+        try{
+            
+            DB::beginTransaction();
+            $request->validate([
+                'code' => 'required',
+                'student_id' => 'required',
+            ]);
+
+            $ranking = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]);
+
+            if($ranking == null) {abort(500);}
+
+            $user = new Ranking_user();
+            $user->ranking_id = $ranking[0]->id;
+            $user->student_id = $request->student_id;
+            $user->puntuation = 0;
+            $user->save();
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha insertado!",
+                "data" => $user,
+            ]);
+
+        } catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha podido insertar! + $e",
+            ]);
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.

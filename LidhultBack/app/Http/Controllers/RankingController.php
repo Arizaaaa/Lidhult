@@ -73,7 +73,31 @@ class RankingController extends Controller
      */
     public function show($id)
     {
-        //
+        try{
+
+            $ranking = DB::select('SELECT *
+                                FROM rankings r
+                                JOIN ranking_users u
+                                WHERE r.id = u.ranking_id
+                                AND u.student_id = ?',
+            [$id]);
+
+            if($ranking == null) {abort(500);}
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Vista exitosa!",
+                "data" => $ranking,
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha encontrado! + $e",
+            ]);
+
+        }
     }
 
     /**
@@ -96,7 +120,37 @@ class RankingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+
+            $request->validate([    
+                'id' => '',
+                'name' => '',
+                'surnames' => '',
+                'email' => '',
+                'nick' => '',
+                'birth_date' => '',
+            ]);
+
+            $student = Ranking::findOrFail($request->id);
+            $student = DB::select('select * FROM rankings WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR birth_date = ?',
+            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->birth_date]);
+
+            return $student;
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Vista exitosa!",
+                "data" => $student,
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha encontrado! + $e",
+            ]);
+
+        }
     }
 
     /**

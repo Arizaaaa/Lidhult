@@ -1,23 +1,58 @@
-<div class="padre">
+<div class="padre" *ngIf="this.ver ==  false">
     <div class="div3">
         <div class="container">
             <header>
-                <h1>Ranking</h1>
+                <h1>Rankings</h1>
             </header>
             <div class="wrapper">
+                <button  type="button" (click)="verUnirseRanking()">Unirte a ranking</button>
+                <div *ngIf="this.unirse == true">
+                    <form (ngSubmit)="unirseRanking()" [formGroup]="codeForm">
+                        <h1>Unirte a ranking</h1>
+                        <div class="txt_field">
+                            <input matInput name="code" formControlName="code" placeholder="Codigo">
+                            <button type="submit">Unirte</button>
+                        </div>
+                    </form>
+                </div>
+                <br><br>
                 <table>
                     <thead>
                         <tr>
-                            <th>Rango</th>
-                            <th>Alumno</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ran of this.rankings">
+                            <td class="rango" (click)="verRanking(ran.id)">{{ran.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="padre" *ngIf="this.ver ==  true">
+    <div class="div3">
+        <div class="container">
+            <header>
+                <h1>{{this.nombre}}</h1>
+            </header>
+            <div class="wrapper"> <br><br>
+            <button class="btn btn-primary" type="button" (click)="volver()">Volver</button>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
                             <th>Puntos</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="rango">1</td>
-                            <td class="alumno">Spain</td>
-                            <td class="puntos">1460</td>
+                        <tr *ngFor="let usu of this.users.data">
+                            <td class="rango">{{usu.name}}</td>
+                            <td class="rango">{{usu.puntuation}}</td>
                         </tr>
                     </tbody>
                 </table>
