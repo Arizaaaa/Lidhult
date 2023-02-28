@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { RankingsService } from './../../services/rankings.service';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +22,8 @@ export class RankingComponent implements OnInit {
   });
 
   constructor( private rankingsService:RankingsService,
-               private authService:AuthService) { }
+               private authService:AuthService,     
+              private router: Router) { }
 
   ngOnInit(): void {
     this.rankingsUsuarios();
@@ -70,6 +72,7 @@ export class RankingComponent implements OnInit {
         
       next: (value: any) => {
         this.users = value;
+        this.rankingsUsuarios();
       }
     });
   }
