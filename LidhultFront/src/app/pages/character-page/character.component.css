@@ -32,6 +32,8 @@
         width: 1050px;
         height: 512px;
         border: 10px solid;
+        margin-top: 2%;
+        overflow-y: hidden;
     }
     
     .img2 {
