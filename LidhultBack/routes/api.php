@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\Ranking_usersController;
@@ -33,6 +34,7 @@ Route::get('showRanking/{id}', [RankingController::class, 'show']);
 Route::post('joinRanking', [Ranking_usersController::class, 'joinRanking']);
 Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']);
 Route::post('createRanking_user', [Ranking_usersController::class, 'create']);
+Route::get('indexCharacters', [CharacterController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

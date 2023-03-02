@@ -13,12 +13,9 @@
 <div class="padre">
     <div class="div3">
         <section class="characters">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img active" alt="Rango 1">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img img2" alt="Rango 2">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img img2" alt="Rango 3">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img img2" alt="Rango 4">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img img2" alt="Rango 5">
-            <img src="http://127.0.0.1:8000/images/common/Eze.png" class="img img2" alt="Rango 6">
+            <div *ngFor="let route of this.imgLv1; let i = index">
+                <img *ngIf="route.level == 1" src="http://127.0.0.1:8000{{route.link}}" class="img" alt="Rango 1" (click)="cambiarImg(i)" [ngClass]="this.faseImagenes[i] == true ? 'active' : 'img2'">
+            </div>
         </section>
         <div class="rank">
             <div class="rank1">

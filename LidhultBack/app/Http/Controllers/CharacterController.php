@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class ImageController extends Controller
+class CharacterController extends Controller
 {
   
     // public function create()
@@ -21,6 +22,18 @@ class ImageController extends Controller
     // {
     //     //
     // }
+
+    public function index() {
+
+        $character = DB::select('select * FROM characters');
+
+        return response()->json([
+            "status" => 1,
+            "msg" => "Vista exitosa!",
+            "data" => $character
+        ]);
+
+    }
 
     public function read($id)
     {

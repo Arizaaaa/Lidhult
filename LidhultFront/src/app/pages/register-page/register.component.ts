@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   pasar = true;
   profesor = true;
 
-  student: RegisterDataStudent = {nick: null,email: null,name: null,surnames: null,password: null,birth_date: null};
+  student: RegisterDataStudent = {nick: null, email: null, name: null, surnames: null, password: null, birth_date: null, avatar: null,id: null};
 
   registerForm = new FormGroup({
     nick: new FormControl('', [Validators.required]),

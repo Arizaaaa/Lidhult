@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
-  user: RegisterDataStudent = { nick: null, name: null, surnames: null, email: null, password: null, birth_date: null }
+  user: RegisterDataStudent = {nick: null, name: null, surnames: null, email: null, password: null, birth_date: null, avatar: null,id: null}
   constructor(
 
     public authService: AuthService,
