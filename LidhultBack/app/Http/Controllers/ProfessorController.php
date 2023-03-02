@@ -97,18 +97,31 @@ class ProfessorController extends Controller
             
             DB::beginTransaction();
             $request->validate([
+                'id' => 'required',
                 'name' => 'required',
                 'surnames' => 'required',
                 'email' => 'required',
                 'nick' => 'required',
                 'password' => 'required',
-                'birth_date' => 'required',
+                'avatar' => 'required',
+                'center' => 'required',
             ]);
 
-            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE email = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, Hash::make($request->password), $request->birth_date, $request->email]);
-            
+            $password = Hash::make($request->password);
+
+            if(Student::where('email', '=', $request->email)->exists()
+            || Student::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+
+            $imageName = time().'.'.$request->avatar->getClientOriginalExtension();
+            $request->avatar->move('images/custom', $imageName);
+
+            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, center = ? WHERE id = ?',
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->avatar, $request->center, $request->id]);
             DB::commit();
+
             $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
                 [$request->email, $request->nick]);
             

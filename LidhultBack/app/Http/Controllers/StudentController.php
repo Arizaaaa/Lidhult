@@ -95,18 +95,29 @@ class StudentController extends Controller
             
             DB::beginTransaction();
             $request->validate([
+                'id' => 'required',
                 'name' => 'required',
                 'surnames' => 'required',
                 'email' => 'required',
                 'nick' => 'required',
                 'password' => 'required',
+                'avatar' => 'required',
                 'birth_date' => 'required',
             ]);
 
-            $request->password = Hash::make($request->password);
+            $password = Hash::make($request->password);
 
-            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE email = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->birth_date, $request->email]);
+            if(Professor::where('email', '=', $request->email)->exists()
+            || Professor::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+
+            $imageName = time().'.'.$request->avatar->getClientOriginalExtension();
+            $request->avatar->move('images/custom', $imageName);
+
+            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->avatar, $request->birth_date, $request->id]);
             DB::commit();
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
