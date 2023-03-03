@@ -23,13 +23,12 @@
 
 <!-- Opcion1 -->
 
-<div class="padre">
+<!-- <div class="padre">
   <div class="div1">
     <header class="header">
       <div class="logo">
         <span (click)="home()">Lidhult</span>
       </div>
-      <!-- <span class="spacer"></span> -->
       <nav>
         <ul class="nav-links">
           <li *ngIf="this.authService.status == 0">
@@ -51,9 +50,40 @@
       </nav>
     </header>
   </div>
-</div>
+</div> -->
 
 <!-- Opcion2 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="padre">
+  <div class="div1">
+    <div class="wrapper">
+      <nav>
+        <span href="#" class="logo">Lidhult</span>
+        <input type="checkbox" name="" id="toggle">
+        <label for="toggle"><i class="material-icons">menu</i></label>
+        <div class="menu">
+          <ul class="nav-links">
+            <li *ngIf="this.authService.status == 0">
+              <a (click)="register()">Register</a>
+            </li>
+            <li *ngIf="this.authService.status == 0">
+              <a (click)="login()">Login</a>
+            </li>
+            <li *ngIf="this.authService.status == 1">
+              <a (click)="ranking()">Ranking</a>
+            </li>
+            <li *ngIf="this.authService.status == 1">
+              <a (click)="perfil()">Perfil</a>
+            </li>
+            <li *ngIf="this.authService.status == 1">
+              <a (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
 
 <!-- Opcion3 -->
 
