@@ -11,6 +11,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PerfilComponent implements OnInit {
 
+file:any;
+
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -59,6 +61,16 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  onFileSelected(event:any) { 
+
+    this.file = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(this.file);
+    reader.onload = (event:any) => {this.file = reader.result;};
+
+  }
+
   update(){
     
     let id = 0;
@@ -91,13 +103,15 @@ export class PerfilComponent implements OnInit {
     } else if (this.updateForm.controls['password'].value == ""){ this.user['password'] = this.authService.password }
     this.user['nick'] = this.authService.user.data[0]['nick'];
 
-    this.user['avatar'] = this.updateForm.controls['img'].value;
+    this.user['id'] = this.authService.user.data[0]['id']
+    this.user['avatar'] = this.file
+    console.log(this.user['avatar'])
     this.authService.updateProfesor(this.user,id).subscribe({
 
       next: (value: RegisterDataStudent) => {
         console.log(value)
         this.user = value;
-        this.router.navigate(['main']);
+        this.router.navigate(['perfil']);
       }
     });
   }

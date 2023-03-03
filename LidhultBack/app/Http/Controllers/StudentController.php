@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Professor;
 use App\Models\Student;
 use Exception;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -112,12 +115,15 @@ class StudentController extends Controller
 
                 abort(500);
             }
-
-            $imageName = time().'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->move('images/custom', $imageName);
+            
+            $decodedData = base64_decode($request->avatar);
+            $extension = pathinfo($decodedData, PATHINFO_EXTENSION);
+            $imageName = 'image_'.time().$extension;
+            $filePath = public_path('images/'.$imageName);
+            file_put_contents($filePath, $decodedData);
 
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->avatar, $request->birth_date, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, '/images/eiiiiii.jpg', $request->birth_date, $request->id]);
             DB::commit();
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',

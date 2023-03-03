@@ -9,7 +9,7 @@
           <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png"
             alt="">
           <div class="small font-italic text-muted mb-4"></div>
-          <input type="file" formControlName = "img">
+          <input type="file" formControlName = "img" (change)="onFileSelected($event)" #fileUpload>
         </div>
       </div>
     </div>

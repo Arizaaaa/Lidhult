@@ -7,7 +7,7 @@ export interface RegisterDataStudent {
     email:string | null,
     password:string | null,
     birth_date:string | null,
-    avatar:string | null,
+    avatar:any | null,
 }
 
 
