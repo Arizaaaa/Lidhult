@@ -130,7 +130,7 @@ class StudentController extends Controller
             $path = storage_path('../public/images/custom/' . $filename);
             file_put_contents($path, $decoded_image);
 
-            $filePath = 'app/public/images/'.$filename;
+            $filePath = '../public/images/custom/'.$filename;
 
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
             [$request->name, $request->surnames, $request->email, $request->nick, $password, $filePath, $request->birth_date, $request->id]);
