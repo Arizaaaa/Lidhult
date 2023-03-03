@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Professor;
 use App\Models\Student;
 use Exception;
+use finfo;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -116,14 +117,23 @@ class StudentController extends Controller
                 abort(500);
             }
             
-            $decodedData = base64_decode($request->avatar);
-            $extension = pathinfo($decodedData, PATHINFO_EXTENSION);
-            $imageName = 'image_'.time().$extension;
-            $filePath = public_path('images/'.$imageName);
-            file_put_contents($filePath, $decodedData);
+            // Obtener el contenido de la imagen en base64 desde la solicitud
+            $base64_image = $request->avatar;
+
+            // Decodificar el contenido de la imagen en base64
+            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
+
+            // Generar un nombre de archivo único
+            $filename = uniqid() . '.webp';
+
+            // Guardar el archivo en la carpeta "public/images"
+            $path = storage_path('../public/images/custom/' . $filename);
+            file_put_contents($path, $decoded_image);
+
+            $filePath = 'app/public/images/'.$filename;
 
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, '/images/eiiiiii.jpg', $request->birth_date, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filePath, $request->birth_date, $request->id]);
             DB::commit();
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',

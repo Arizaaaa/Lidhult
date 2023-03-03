@@ -115,11 +115,23 @@ class ProfessorController extends Controller
                 abort(500);
             }
 
-            $imageName = time().'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->move('images/custom', $imageName);
+            // Obtener el contenido de la imagen en base64 desde la solicitud
+            $base64_image = $request->avatar;
+
+            // Decodificar el contenido de la imagen en base64
+            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
+
+            // Generar un nombre de archivo único
+            $filename = uniqid() . '.webp';
+
+            // Guardar el archivo en la carpeta "public/images"
+            $path = storage_path('../public/images/custom/' . $filename);
+            file_put_contents($path, $decoded_image);
+
+            $filePath = 'app/public/images/'.$filename;
 
             DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->avatar, $request->center, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filePath, $request->center, $request->id]);
             DB::commit();
 
             $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
