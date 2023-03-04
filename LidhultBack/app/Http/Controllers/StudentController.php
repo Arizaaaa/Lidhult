@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Professor;
 use App\Models\Student;
 use Exception;
+use finfo;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -95,18 +99,39 @@ class StudentController extends Controller
             
             DB::beginTransaction();
             $request->validate([
+                'id' => 'required',
                 'name' => 'required',
                 'surnames' => 'required',
                 'email' => 'required',
                 'nick' => 'required',
                 'password' => 'required',
+                'avatar' => 'required',
                 'birth_date' => 'required',
             ]);
 
-            $request->password = Hash::make($request->password);
+            $password = Hash::make($request->password);
 
-            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE email = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $request->password, $request->birth_date, $request->email]);
+            if(Professor::where('email', '=', $request->email)->exists()
+            || Professor::where('nick', '=', $request->nick)->exists()) {
+
+                abort(500);
+            }
+            
+            // Obtener el contenido de la imagen en base64 desde la solicitud
+            $base64_image = $request->avatar;
+
+            // Decodificar el contenido de la imagen en base64
+            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
+
+            // Generar un nombre de archivo único
+            $filename = uniqid() . '.webp';
+
+            // Guardar el archivo en la carpeta "public/images"
+            $path = storage_path('../public/images/custom/' . $filename);
+            file_put_contents($path, $decoded_image);
+            
+            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
             DB::commit();
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',

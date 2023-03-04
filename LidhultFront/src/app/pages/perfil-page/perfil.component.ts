@@ -11,13 +11,17 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class PerfilComponent implements OnInit {
 
+file:any;
+
   constructor(
     public authService: AuthService,
     public router: Router,
+
+    
   ) { }
 
   cambiarContra = true;
-  user:RegisterDataStudent={nick: null,name: null,surnames: null,email: null,password: null,birth_date: null}
+  user:RegisterDataStudent = {nick: null,name: null,surnames: null,email: null,password: null,birth_date: null,avatar: null,id: null}
 
   updateForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -26,6 +30,7 @@ export class PerfilComponent implements OnInit {
     date: new FormControl(),
     center: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
+    img: new FormControl('', [Validators.required]),
   });
   
   ngOnInit(): void {
@@ -39,6 +44,7 @@ export class PerfilComponent implements OnInit {
         date: null,
         center: this.authService.user.data[0]['center'],
         password: "",
+        img: "",
       });
     } else {
       let fecha = new Date(this.authService.user.data[0]['birth_date'])
@@ -50,8 +56,21 @@ export class PerfilComponent implements OnInit {
         date: fecha,
         center: "",
         password: "",
+        img: "",
       });
     }
+
+    console.log(this.authService.user.data[0])
+  }
+
+  onFileSelected(event:any) { 
+
+    this.file = event.target.files[0];
+
+    let reader = new FileReader();
+    reader.readAsDataURL(this.file);
+    reader.onload = (event:any) => {this.file = reader.result;};
+
   }
 
   update(){
@@ -85,13 +104,15 @@ export class PerfilComponent implements OnInit {
     if (this.updateForm.controls['password'].value != "") { this.user['password'] = this.updateForm.controls['password'].value
     } else if (this.updateForm.controls['password'].value == ""){ this.user['password'] = this.authService.password }
     this.user['nick'] = this.authService.user.data[0]['nick'];
-    
+
+    this.user['id'] = this.authService.user.data[0]['id']
+    this.user['avatar'] = this.file
     this.authService.updateProfesor(this.user,id).subscribe({
 
       next: (value: RegisterDataStudent) => {
         console.log(value)
         this.user = value;
-        this.router.navigate(['main']);
+        this.router.navigate(['perfil']);
       }
     });
   }
