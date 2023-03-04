@@ -13,16 +13,14 @@
 <div class="padre">
     <div class="div3">
         <section class="characters">
-            <div *ngFor="let route of this.imgLv1; let i = index">
-                <img *ngIf="route.level == 1" src="http://127.0.0.1:8000{{route.link}}" class="img" alt="Rango 1" (click)="cambiarImg(i)" [ngClass]="this.faseImagenes[i] == true ? 'active' : 'img2'">
-            </div>
+            <img *ngFor="let route of this.imgLv1; let i = index" src="http://127.0.0.1:8000{{route.link}}" class="img" alt="{{route.name}}" (click)="cambiarImg(i)" [ngClass]="this.faseImagenes[i] == true ? 'active' : 'img2'">
         </section>
         <div class="rank">
             <div class="rank1">
-                <img src="http://127.0.0.1:8000/images/common/Eze.png" alt=""> 
-                <img src="http://127.0.0.1:8000/images/common/Eze.png" alt="">
-                <img src="http://127.0.0.1:8000/images/common/Eze.png" alt="">
-                <img src="http://127.0.0.1:8000/images/common/Eze.png" alt="">
+                <img src="http://127.0.0.1:8000/images/common/{{this.selected}}2.webp" alt=""> 
+                <img src="http://127.0.0.1:8000/images/common/{{this.selected}}3.webp" alt="">
+                <img src="http://127.0.0.1:8000/images/common/{{this.selected}}4.webp" alt="">
+                <img src="http://127.0.0.1:8000/images/common/{{this.selected}}5.webp" alt="">
             </div>
         </div>
     </div>

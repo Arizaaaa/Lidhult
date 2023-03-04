@@ -12,10 +12,8 @@ export class CharacterComponent implements OnInit {
 
   images:any = [];
   imgLv1:any = [];
-  imgLv2:any = [];
-  imgLv3:any = [];
-  imgLv4:any = [];
-  imgLv5:any = [];
+
+  selected = 'Eze';
 
   ngOnInit(): void {
     this.recogerImg();
@@ -41,17 +39,21 @@ export class CharacterComponent implements OnInit {
   ordenarImg(images:any){
 
     for (let i = 0; i < images.length; i++) {
-
-      if (images[i].level == 1) { this.imgLv1.push(images[i].link) }
-      else if (images[i].level == 2){ this.imgLv2.push(images[i]) }
-      else if (images[i].level == 3){ this.imgLv3.push(images[i]) }
-      else if (images[i].level == 4){ this.imgLv4.push(images[i]) }
-      else if (images[i].level == 5){ this.imgLv5.push(images[i]) }
+      if (images[i].level == 1) { this.imgLv1.push(images[i]) }
     }
-   
+    console.log(this.imgLv1)
+
   }
 
   cambiarImg(id:number){
+
+    for (let i = 0; i <  this.imgLv1.length; i++) {
+
+      if(id == i){this.faseImagenes[i] = true; this.selected = this.imgLv1[i].name} 
+      else { this.faseImagenes[i] = false }
+      
+    }
+
 
   }
 
