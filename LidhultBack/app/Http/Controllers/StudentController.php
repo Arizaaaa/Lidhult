@@ -129,11 +129,9 @@ class StudentController extends Controller
             // Guardar el archivo en la carpeta "public/images"
             $path = storage_path('../public/images/custom/' . $filename);
             file_put_contents($path, $decoded_image);
-
-            $filePath = '../public/images/custom/'.$filename;
-
+            
             DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filePath, $request->birth_date, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
             DB::commit();
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',

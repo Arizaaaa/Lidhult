@@ -59,6 +59,8 @@ file:any;
         img: "",
       });
     }
+
+    console.log(this.authService.user.data[0])
   }
 
   onFileSelected(event:any) { 
@@ -105,7 +107,6 @@ file:any;
 
     this.user['id'] = this.authService.user.data[0]['id']
     this.user['avatar'] = this.file
-    console.log(this.user['avatar'])
     this.authService.updateProfesor(this.user,id).subscribe({
 
       next: (value: RegisterDataStudent) => {
