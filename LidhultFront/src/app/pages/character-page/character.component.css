@@ -44,7 +44,6 @@
     
     .active {
         transition: .5s ease;
-        width: 512px;
         height: 512px;
         opacity: 1;
         flex-grow: 1;

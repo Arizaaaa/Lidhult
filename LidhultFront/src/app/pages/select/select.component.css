@@ -41,7 +41,7 @@
     transition: .5s
 }
 
-@media screen and (max-width: 1980px) {
+@media all and (max-width: 1980px) {
     .display-flex {
         gap: 7rem;
         display: flex;
@@ -71,7 +71,7 @@
     }
 }
 
-@media screen and (max-width: 1730px) {
+@media all and (max-width: 1730px) {
     .display-flex {
         gap: 5rem;
         display: flex;
@@ -84,7 +84,7 @@
     }
 }
 
-@media screen and (max-width: 1530px) {
+@media all and (max-width: 1530px) {
     .display-flex {
         gap: 2rem;
         display: flex;
@@ -97,7 +97,7 @@
     }
 }
 
-@media screen and (max-width: 1130px) {
+@media all and (max-width: 1130px) {
     .display-flex {
         display: flex;
         place-items: center;
@@ -118,7 +118,7 @@
     }
 }
 
-@media screen and (max-width: 930px) {
+@media all and (max-width: 930px) {
 
     .display-flex {
         display: grid;
