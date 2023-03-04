@@ -128,10 +128,8 @@ class ProfessorController extends Controller
             $path = storage_path('../public/images/custom/' . $filename);
             file_put_contents($path, $decoded_image);
 
-            $filePath = '../public/images/custom/'.$filename;
-
             DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filePath, $request->center, $request->id]);
+            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->center, $request->id]);
             DB::commit();
 
             $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
