@@ -30,7 +30,7 @@
     .characters {
         display: flex;
         width: 1050px;
-        height: 512px;
+        height: 532px;
         border: 10px solid;
         margin-top: 2%;
         overflow-y: hidden;
