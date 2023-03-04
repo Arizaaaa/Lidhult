@@ -25,7 +25,7 @@ return new class extends Migration
                 ->constrained('characters')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('avatar')->default('/images/user_placeholder.png');
+            $table->string('avatar')->default('/images/custom/user_placeholder.png');
             $table->string('birth_date');
             $table->timestamps();
         });
