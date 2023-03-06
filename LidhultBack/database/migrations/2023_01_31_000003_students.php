@@ -26,6 +26,7 @@ return new class extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->string('avatar')->default('/images/custom/user_placeholder.png');
+            $table->integer('total_puntuation')->default(0);
             $table->string('birth_date');
             $table->timestamps();
         });

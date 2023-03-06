@@ -58,7 +58,8 @@ class Ranking_usersController extends Controller
                                         FROM students s
                                         JOIN ranking_users r
                                         WHERE s.id = r.student_id
-                                        AND r.ranking_id = ?',
+                                        AND r.ranking_id = ?
+                                        ORDER BY ASC',
             [$id]);
 
             if ($ranking_users == null) {abort(500);}
