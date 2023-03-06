@@ -21,6 +21,12 @@ class Ranking_usersController extends Controller
                 'puntuation' => '',
             ]);
 
+            $ranking_users = DB::select('SELECT * 
+                                        FROM students
+                                        WHERE ranking_id = ?
+                                        AND student_id = ?',
+            [$request->ranking_id, $request->student_id]);
+
             $user = new Ranking_user();
             $user->ranking_id = $request->ranking_id;
             $user->student_id = $request->student_id;
@@ -83,12 +89,18 @@ class Ranking_usersController extends Controller
                 'student_id' => 'required',
             ]);
 
-            $ranking = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]);
+            $cond1 = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]);
 
-            if($ranking == null) {abort(500);}
+            $cond2 = DB::select('SELECT * 
+                                        FROM ranking_users
+                                        WHERE ranking_id = ?
+                                        AND student_id = ?',
+            [$cond1[0]->id, $request->student_id]);
+
+            if($cond1 == null || $cond2 != null) {abort(500);}
 
             $user = new Ranking_user();
-            $user->ranking_id = $ranking[0]->id;
+            $user->ranking_id = $cond1[0]->id;
             $user->student_id = $request->student_id;
             $user->puntuation = 0;
             $user->save();
