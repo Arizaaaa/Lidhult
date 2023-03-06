@@ -12,7 +12,7 @@
     
   } */
 
-body {
+/* body {
     margin-top: 20px;
     background-color: #f2f6fc;
     color: #69707a;
@@ -80,4 +80,19 @@ body {
     padding-right: 0;
     margin-left: 1rem;
     margin-right: 1rem;
+} */
+
+.img-perfil{
+    border: 1px solid;
+}
+
+.img-perfil2{
+    border: 1px solid;
+    margin-right: 50%;
+}
+
+.img-perfil img{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
 }
