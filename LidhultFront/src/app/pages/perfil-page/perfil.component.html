@@ -77,13 +77,11 @@
         <input formControlName="surnames" id="inputApellido" type="text">
         <label for="inputEmailAddress">Email</label>
         <input formControlName="email" id="inputEmailAddress" type="email">
-        <label *ngIf="this.authService.user.data[0]['center'] != undefined" for="inputEmailAddress">Centro</label>
-        <input *ngIf="this.authService.user.data[0]['center'] != undefined" formControlName="center"
+        <label for="inputEmailAddress">Centro</label>
+        <input formControlName="center"
           id="inputEmailAddress" type="center">
         <label>Contraseña</label>
-        <br *ngIf="this.cambiarContra == true">
-        <button *ngIf="this.cambiarContra == true" type="button"
-          (click)="changePassword()">Cambiar contraseña</button>
+        <button type="button">Cambiar contraseña</button>
         <input *ngIf="this.cambiarContra == false"formControlName="password" id="inputContraseña"
           type="password">
 
