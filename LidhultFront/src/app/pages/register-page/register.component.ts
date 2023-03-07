@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
     con: new FormControl('', [Validators.required]),
     conValidate: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required]),
-  }, [this.passwordMatch('con','conValidate' )]);
+  }, [this.passwordMatch('con','conValidate')]);
 
   constructor(
     public authService: AuthService,
@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
             this.student = value;
             if(value['status'] == 1){
               this.status = value['status']
-              this.router.navigate(['character']);
+              this.router.navigate(['home']);
               }
               this.comprobacionRegister(value);
             }
@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
             this.student = value;
             if(value['status'] == 1){
               this.status = value['status']
-              this.router.navigate(['character']);
+              this.router.navigate(['home']);
             }
             this.comprobacionRegister(value);
           }

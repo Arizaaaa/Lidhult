@@ -1,3 +1,4 @@
+import { MenuProfessorComponent } from './pages/menu-professor/menu-professor.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -28,8 +29,10 @@ const routes: Routes = [
   canActivate: [AuthGuard]},
   {path: 'perfil',
   component: PerfilComponent,
-  canActivate: [AuthGuard]
-  },
+  canActivate: [AuthGuard]},
+  {path: 'menuProfesssor',
+  component: MenuProfessorComponent,
+  canActivate: [AuthGuard]},
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 
 ];

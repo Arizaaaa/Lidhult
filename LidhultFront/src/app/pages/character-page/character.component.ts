@@ -53,8 +53,6 @@ export class CharacterComponent implements OnInit {
       else { this.faseImagenes[i] = false }
       
     }
-
-
   }
 
 }
