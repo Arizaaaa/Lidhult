@@ -26,6 +26,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MenuProfessorComponent } from './pages/menu-professor/menu-professor.component';
 
 
 
@@ -41,7 +42,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     SelectComponent,
     HeaderComponent,
     CharacterComponent,
-    HomeComponent
+    HomeComponent,
+    MenuProfessorComponent
   ],
   imports: [
     BrowserModule,
