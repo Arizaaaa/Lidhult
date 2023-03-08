@@ -71,20 +71,34 @@
         <img src="http://127.0.0.1:8000/images\custom\640313c4a1c61.webp">
       </div>
       <div class="form">
-        <label>Nombre</label>
-        <input formControlName="name" id="inputNombre" type="text">
-        <label>Apellido</label>
-        <input formControlName="surnames" id="inputApellido" type="text">
-        <label for="inputEmailAddress">Email</label>
-        <input formControlName="email" id="inputEmailAddress" type="email">
-        <label for="inputEmailAddress">Centro</label>
-        <input formControlName="center"
-          id="inputEmailAddress" type="center">
-        <label>Contraseña</label>
-        <button type="button">Cambiar contraseña</button>
-        <input *ngIf="this.cambiarContra == false"formControlName="password" id="inputContraseña"
-          type="password">
-
+        <form [formGroup]="updateForm">
+        <div class="card-header" *ngIf="this.authService.user.data[0]['center'] != undefined">Profesor:
+          {{this.authService.user.data[0]['nick']}}</div>
+        <div class="card-header" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">Estudiante:
+          {{this.authService.user.data[0]['nick']}}</div>
+        <div class="grupo-input">
+          <label class="label">Nombre</label>
+          <input class="input" formControlName="name" id="inputNombre" type="text">
+        </div>
+        <div class="grupo-input">
+          <label class="label">Apellido</label>
+          <input class="input" formControlName="surnames" id="inputApellido" type="text">
+        </div>
+        <div class="grupo-input">
+          <label class="label">Email</label>
+          <input class="input" formControlName="surnames" id="inputApellido" type="email">
+        </div>
+        <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
+          <label class="label">Centro</label>
+          <input class="input" formControlName="center" id="inputEmailAddress" type="center">
+        </div>
+        <div class="grupo-input">
+          <label class="label">Contraseña</label>
+          <button *ngIf="this.cambiarContra == true" type="button"
+          (click)="changePassword()">Cambiar contraseña</button>
+          <input class="input"  *ngIf="this.cambiarContra == false" formControlName="password" id="inputContraseña" type="password">
+        </div>
+      </form>
       </div>
     </div>
   </div>
