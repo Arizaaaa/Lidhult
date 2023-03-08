@@ -28,7 +28,7 @@ const routes: Routes = [
   canActivate: [AuthGuard]},
   {path: 'perfil',
   component: PerfilComponent,
-  canActivate: [AuthGuard]
+  /* canActivate: [AuthGuard] */
   },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 
