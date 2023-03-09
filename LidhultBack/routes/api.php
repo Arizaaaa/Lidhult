@@ -35,6 +35,7 @@ Route::post('joinRanking', [Ranking_usersController::class, 'joinRanking']);
 Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']);
 Route::post('createRanking_user', [Ranking_usersController::class, 'create']);
 Route::get('indexCharacters', [CharacterController::class, 'index']);
+Route::post('sendMessage', [MessageController::class, 'create']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
