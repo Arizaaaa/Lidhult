@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class MessageController extends Controller
 {
     
-    public function createMessage(Request $request) { // Crea un estudiante
+    public function createMessage(Request $request) { // Crea un mensaje
 
         try{
             
@@ -43,7 +43,7 @@ class MessageController extends Controller
         }
     }
 
-    public function createRequest(Request $request) { // Crea un estudiante
+    public function createRequest(Request $request) { // Crea una petición de unión a un ranking
 
         try{
             
