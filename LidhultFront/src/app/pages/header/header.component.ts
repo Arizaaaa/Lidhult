@@ -25,9 +25,11 @@ export class HeaderComponent implements OnInit {
 
   ranking(){this.router.navigate(['ranking']); }
 
+  menuRanking(){this.router.navigate(['menuProfesssor']); }
+
   perfil(){this.router.navigate(['perfil']);}
 
-  home(){this.router.navigate(['home']); }
+  home(){this.router.navigate(['home']);}
 
   logout(){this.messagesService.logoutMessage();}
 
