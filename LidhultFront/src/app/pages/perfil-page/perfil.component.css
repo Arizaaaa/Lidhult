@@ -117,7 +117,7 @@
     justify-content: center;
     flex-direction: column;
     padding-right: 20%;
-    background-color: white;
+    /* background-color: white; */
     padding-left: 10%;
     border-radius: 20%;
 }
@@ -147,9 +147,8 @@
 }
 
 .img-character img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
+    max-height: 250px;
+    
 
 }
 
@@ -165,7 +164,7 @@
 .grupo-input input {
     /* max-width: 190px; */
     height: 44px;
-    background-color: #05060f0a;
+    background-color: rgb(255,255,255,0.7);
     border-radius: .5rem;
     padding: 0 1rem;
     border: 2px solid transparent;
@@ -183,7 +182,7 @@
 }
 
 .grupo-input button {
-    /* max-width: 50%; */
+    max-width: 50%;
     height: 44px;
     background-color: #05060f0a;
     border-radius: .5rem;
