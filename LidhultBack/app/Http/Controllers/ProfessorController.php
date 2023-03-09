@@ -115,22 +115,30 @@ class ProfessorController extends Controller
                 abort(500);
             }
 
-            // Obtener el contenido de la imagen en base64 desde la solicitud
-            $base64_image = $request->avatar;
+            if($request->avatar == "") {
 
-            // Decodificar el contenido de la imagen en base64
-            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
+                DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
+                [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->center, $request->id]);
+                DB::commit();
+            } else {
 
-            // Generar un nombre de archivo único
-            $filename = uniqid() . '.webp';
+                // Obtener el contenido de la imagen en base64 desde la solicitud
+                $base64_image = $request->avatar;
 
-            // Guardar el archivo en la carpeta "public/images"
-            $path = storage_path('../public/images/custom/' . $filename);
-            file_put_contents($path, $decoded_image);
+                // Decodificar el contenido de la imagen en base64
+                $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
 
-            DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, center = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->center, $request->id]);
-            DB::commit();
+                // Generar un nombre de archivo único
+                $filename = uniqid() . '.webp';
+
+                // Guardar el archivo en la carpeta "public/images"
+                $path = storage_path('../public/images/custom/' . $filename);
+                file_put_contents($path, $decoded_image);
+
+                DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, center = ? WHERE id = ?',
+                [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->center, $request->id]);
+                DB::commit();
+            }
 
             $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
                 [$request->email, $request->nick]);

@@ -41,7 +41,6 @@ export class CharacterComponent implements OnInit {
     for (let i = 0; i < images.length; i++) {
       if (images[i].level == 1) { this.imgLv1.push(images[i]) }
     }
-    console.log(this.imgLv1)
 
   }
 

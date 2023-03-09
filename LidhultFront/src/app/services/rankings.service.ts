@@ -52,7 +52,6 @@ export class RankingsService {
        filter((value: any) => {
          let found = false;
          if(value != null){
-          console.log(value)
            found = true
          }else{
            found = false

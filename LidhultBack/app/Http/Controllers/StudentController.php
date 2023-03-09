@@ -105,7 +105,7 @@ class StudentController extends Controller
                 'email' => 'required',
                 'nick' => 'required',
                 'password' => 'required',
-                'avatar' => 'required',
+                'avatar' => '',
                 'birth_date' => 'required',
             ]);
 
@@ -117,22 +117,31 @@ class StudentController extends Controller
                 abort(500);
             }
             
-            // Obtener el contenido de la imagen en base64 desde la solicitud
-            $base64_image = $request->avatar;
-
-            // Decodificar el contenido de la imagen en base64
-            $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
-
-            // Generar un nombre de archivo único
-            $filename = uniqid() . '.webp';
-
-            // Guardar el archivo en la carpeta "public/images"
-            $path = storage_path('../public/images/custom/' . $filename);
-            file_put_contents($path, $decoded_image);
+            if($request->avatar == "") {
             
-            DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
-            [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
-            DB::commit();
+                DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
+                [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->birth_date, $request->id]);
+                DB::commit();
+            } else {
+
+                // Obtener el contenido de la imagen en base64 desde la solicitud
+                $base64_image = $request->avatar;
+
+                // Decodificar el contenido de la imagen en base64
+                $decoded_image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_image));
+
+                // Generar un nombre de archivo único
+                $filename = uniqid() . '.webp';
+
+                // Guardar el archivo en la carpeta "public/images"
+                $path = storage_path('../public/images/custom/' . $filename);
+                file_put_contents($path, $decoded_image);
+
+                DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, avatar = ?, birth_date = ? WHERE id = ?',
+                [$request->name, $request->surnames, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
+                DB::commit();
+            }
+            
             
             $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
                 [$request->email, $request->nick]);
