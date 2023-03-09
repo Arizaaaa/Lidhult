@@ -51,14 +51,12 @@ class MessageController extends Controller
             $request->validate([
                 'sender' => 'required',
                 'receiver' => 'required',
-                'content' => 'required',
             ]);
             
             $message = new Message();
             $message->sender = $request->sender;
             $message->receiver = $request->receiver;
             $message->issue = "Petición para unirse al Ranking";
-            $message->content = $request->content;
             $message->save();
             DB::commit();
             

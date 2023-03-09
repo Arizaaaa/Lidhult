@@ -7,23 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class CharacterController extends Controller
 {
-  
-    // public function create()
-    // {
-    //     //
-    // }
 
-    // public function delete($id)
-    // {
-    //     //
-    // }
-
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    public function index() {
+    public function index() { // Devuelve todos los carácteres
 
         $character = DB::select('select * FROM characters');
 
@@ -33,10 +18,5 @@ class CharacterController extends Controller
             "data" => $character
         ]);
 
-    }
-
-    public function read($id)
-    {
-        //
     }
 }

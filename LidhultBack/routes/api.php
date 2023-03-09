@@ -32,7 +32,7 @@ Route::post('readStudent', [StudentController::class, 'read']);
 Route::post('login', [LoginController::class, 'login']);
 Route::post('createRanking', [RankingController::class, 'create']);
 Route::get('showRanking/{id}', [RankingController::class, 'show']);
-Route::post('joinRanking', [Ranking_usersController::class, 'joinRanking']);
+Route::post('requestRanking', [Ranking_usersController::class, 'requestRanking']);
 Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']);
 Route::post('createRanking_user', [Ranking_usersController::class, 'create']);
 Route::get('indexCharacters', [CharacterController::class, 'index']);

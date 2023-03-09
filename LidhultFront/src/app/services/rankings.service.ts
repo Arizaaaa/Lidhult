@@ -11,7 +11,7 @@ export class RankingsService {
 
   showRankingsUrl:any
   showRankingUrl:any
-  joinRankingUrl:any
+  requestRankingUrl:any
 
   rankingsUsuarios(id:number) : Observable<any>{
    this.showRankingsUrl = "http://localhost:8000/api/showRanking/"+id
@@ -46,9 +46,9 @@ export class RankingsService {
    }
    
    unirseRankings(code:any, student_id:any) : Observable<any>{
-    this.joinRankingUrl = "http://localhost:8000/api/joinRanking"
+    this.requestRankingUrl = "http://localhost:8000/api/requestRanking"
     let request = {code, student_id};
-     return this.http.post<any>(this.joinRankingUrl,request).pipe(
+     return this.http.post<any>(this.requestRankingUrl,request).pipe(
        filter((value: any) => {
          let found = false;
          if(value != null){

@@ -164,37 +164,7 @@ class ProfessorController extends Controller
         
     }
 
-    public function avatar(Request $request) {
-
-        try{
-
-            DB::beginTransaction();
-            $request->validate([
-                'dato' => 'required',
-                'avatar' => 'required',
-            ]);
-
-            DB::update('update professors set avatar = ? WHERE email = ? OR nick = ?',
-            [$request->avatar, $request->dato, $request->dato]);
-            DB::commit();
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha actualizado!",
-            ]);
-
-        } catch (Exception $e) {
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "No se ha podido actualizar + $e!",
-            ]);
-
-        }
-
-    }
-
-    public function character(Request $request) {
+    public function character(Request $request) { // Actualiza el personaje
 
         try{
 

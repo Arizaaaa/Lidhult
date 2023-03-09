@@ -10,47 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Ranking_usersController extends Controller
 {
 
-    public function create(Request $request)
-    {
-        try{
-            
-            DB::beginTransaction();
-            $request->validate([
-                'ranking_id' => 'required',
-                'student_id' => 'required',
-                'puntuation' => '',
-            ]);
-
-            $ranking_users = DB::select('SELECT * 
-                                        FROM students
-                                        WHERE ranking_id = ?
-                                        AND student_id = ?',
-            [$request->ranking_id, $request->student_id]);
-
-            $user = new Ranking_user();
-            $user->ranking_id = $request->ranking_id;
-            $user->student_id = $request->student_id;
-            $user->puntuation = 0;
-            $user->save();
-            DB::commit();
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha insertado!",
-                "data" => $user,
-            ]);
-
-        } catch (Exception $e) {
-
-            DB::rollBack();
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se ha podido insertar! + $e",
-            ]);
-        }
-    }
-
-    public function index($id){
+    public function index($id){ // Devuelve los usuarios del ranking deseado
 
         try{
             
@@ -63,7 +23,7 @@ class Ranking_usersController extends Controller
 
             [$id]);
 
-            if ($ranking_users == null) {abort(500);}
+            if ($ranking_users == null) {abort(500);} // Devuelve error si no existen usuarios en el ranking
 
             return response()->json([
                 "status" => 1,
@@ -81,7 +41,7 @@ class Ranking_usersController extends Controller
 
     }
     
-    public function joinRanking(Request $request){
+    public function requestRanking(Request $request){ // Verifica al usuario para unirse a un ranking
 
         try{
             
@@ -91,26 +51,37 @@ class Ranking_usersController extends Controller
                 'student_id' => 'required',
             ]);
 
-            $cond1 = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]);
+            $cond1 = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]); // Verifica el código
 
             $cond2 = DB::select('SELECT * 
-                                        FROM ranking_users
-                                        WHERE ranking_id = ?
-                                        AND student_id = ?',
-            [$cond1[0]->id, $request->student_id]);
+                                FROM ranking_users
+                                WHERE ranking_id = ?
+                                AND student_id = ?',
+            [$cond1[0]->id, $request->student_id]); // Verifica si el estudiante ya existe en ese ranking
 
-            if($cond1 == null || $cond2 != null) {abort(500);}
+            if($cond1 == null || $cond2 != null) {abort(500);} // Si se cumplen las condiciones devuelve error
 
-            $user = new Ranking_user();
-            $user->ranking_id = $cond1[0]->id;
-            $user->student_id = $request->student_id;
-            $user->puntuation = 0;
-            $user->save();
-            DB::commit();
+            $student = DB::select('SELECT *
+                                    FROM students
+                                    WHERE id = ?',
+            [$request->student_id]);
+
+            $professor = DB::select('SELECT *
+                                    FROM professors
+                                    WHERE id = (SELECT professor_id 
+                                    FROM rankings 
+                                    WHERE code = ?)',
+            [$request->code]);
+
+            $nicks = new Request();
+            $nicks->sender = $student[0]->nick;
+            $nicks->receiver = $professor[0]->nick;
+
+            $user = (new MessageController)->createRequest($nicks);
 
             return response()->json([
                 "status" => 1,
-                "msg" => "Se ha insertado!",
+                "msg" => "Se ha enviado la solicitud!",
                 "data" => $user,
             ]);
 
