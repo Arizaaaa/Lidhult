@@ -60,7 +60,6 @@ export class AuthService {
 
   updateProfesor(profesor:RegisterDataStudent,id:number) : Observable<RegisterDataStudent>{
 
-    console.log(profesor)
     if (id == 0) {
       return this.http.post<RegisterDataStudent>(this.updateProfessorUrl, profesor).pipe(
         filter((value: any) => {
