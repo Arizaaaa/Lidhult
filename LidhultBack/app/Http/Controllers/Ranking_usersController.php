@@ -73,6 +73,14 @@ class Ranking_usersController extends Controller
                                     WHERE code = ?)',
             [$request->code]);
 
+
+
+
+            // Arreglar
+
+
+
+
             $nicks = new Request();
             $nicks->sender = $student[0]->nick;
             $nicks->receiver = $professor[0]->nick;
