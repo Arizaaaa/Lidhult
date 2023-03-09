@@ -37,7 +37,7 @@
           <li *ngIf="this.authService.status == 0">
             <a (click)="login()">Login</a>
           </li>
-          <li *ngIf="this.authService.status == 1">
+          <li *ngIf="this.authService.status == 1 && this.authService.status == 1 ">
             <a (click)="ranking()">Ranking</a>
           </li>
           <li *ngIf="this.authService.status == 1">

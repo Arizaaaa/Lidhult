@@ -59,7 +59,8 @@ class Ranking_usersController extends Controller
                                         JOIN ranking_users r
                                         WHERE s.id = r.student_id
                                         AND r.ranking_id = ?
-                                        ORDER BY ASC',
+                                        ORDER BY puntuation DESC',
+
             [$id]);
 
             if ($ranking_users == null) {abort(500);}
