@@ -110,6 +110,18 @@
     gap: 6px;
 }
 
+.nick-container{
+    background: rgb(168,168,168,0.8);
+    padding: 3% 0% 1% 1.5%;
+    margin-bottom: 3%;
+    border-radius: 16px;
+}
+
+#nick-usuario{
+    padding-bottom: 5%;
+    font-size: 1.5rem;
+}
+
 .form {
     grid-area: 1 / 2 / 3 / 3;
     display: flex;
@@ -117,9 +129,12 @@
     justify-content: center;
     flex-direction: column;
     padding-right: 20%;
-    /* background-color: white; */
-    padding-left: 10%;
-    border-radius: 20%;
+}
+
+.form-container {
+    background-color: rgb(255, 255, 255, 0.85);
+    padding: 10%;
+    border-radius: 23px;
 }
 
 .img-perfil {
@@ -148,8 +163,6 @@
 
 .img-character img {
     max-height: 250px;
-    
-
 }
 
 .grupo-input {
@@ -164,7 +177,7 @@
 .grupo-input input {
     /* max-width: 190px; */
     height: 44px;
-    background-color: rgb(255,255,255,0.7);
+    background-color: #05060f18;
     border-radius: .5rem;
     padding: 0 1rem;
     border: 2px solid transparent;
@@ -182,16 +195,23 @@
 }
 
 .grupo-input button {
-    max-width: 50%;
     height: 44px;
-    background-color: #05060f0a;
+    background-color: #05060f18;
     border-radius: .5rem;
     padding: 0 1rem;
     border: 2px solid transparent;
     font-size: 1rem;
     transition: border-color .3s cubic-bezier(.25, .01, .25, 1) 0s, color .3s cubic-bezier(.25, .01, .25, 1) 0s, background .2s cubic-bezier(.25, .01, .25, 1) 0s;
-    margin-bottom: 2%;
+    justify-content: center;
 }
+
+#btn-pssw{
+max-width: 30%;
+}
+
+#btn-save{
+    margin: 8% 15% 0% 15%;
+} 
 
 .input:hover,
 .input:focus,

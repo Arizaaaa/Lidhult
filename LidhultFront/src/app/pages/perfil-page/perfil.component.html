@@ -71,44 +71,50 @@
         <img src="http://127.0.0.1:8000/images\common/Eze1.webp">
       </div>
       <div class="form">
-        <form [formGroup]="updateForm">
-          <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
-            <label>
-              Profesor: {{this.authService.user.data[0]['nick']}}
-            </label>
-          </div>
-          <div class="grupo-input" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
-            <label>
-              Estudiante:
-              {{this.authService.user.data[0]['nick']}}
-            </label>
-          </div>
-          <div class="grupo-input">
-            <label>Nombre</label>
-            <input formControlName="name" id="inputNombre" type="text">
-          </div>
-          <div class="grupo-input">
-            <label>Apellido</label>
-            <input formControlName="surnames" id="inputApellido" type="text">
-          </div>
-          <div class="grupo-input">
-            <label>Email</label>
-            <input formControlName="surnames" id="inputApellido" type="email">
-          </div>
-          <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
-            <label>Centro</label>
-            <input formControlName="center" id="inputEmailAddress" type="center">
-          </div>
-          <div class="grupo-input">
-            <label>Contraseña</label>
-            <button *ngIf="this.cambiarContra == true" type="button" (click)="changePassword()">Cambiar
-              contraseña</button>
-            <input *ngIf="this.cambiarContra == false" formControlName="password" id="inputContraseña" type="password">
-          </div>
-          <div class="grupo-input">
-            <button (click)="update()" type="button">Guardar</button>
-          </div>
-        </form>
+        <div class="form-container">
+          <form [formGroup]="updateForm">
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
+              <div class="nick-container">
+                <label id="nick-usuario">
+                  Profesor: {{this.authService.user.data[0]['nick']}}
+                </label>
+              </div>
+            </div>
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
+              <div class="nick-container"><label id="nick-usuario">
+                Estudiante:
+                {{this.authService.user.data[0]['nick']}}
+              </label>
+            </div>
+            </div>
+            <div class="grupo-input">
+              <label>Nombre</label>
+              <input formControlName="name" id="inputNombre" type="text">
+            </div>
+            <div class="grupo-input">
+              <label>Apellido</label>
+              <input formControlName="surnames" id="inputApellido" type="text">
+            </div>
+            <div class="grupo-input">
+              <label>Email</label>
+              <input formControlName="surnames" id="inputApellido" type="email">
+            </div>
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
+              <label>Centro</label>
+              <input formControlName="center" id="inputEmailAddress" type="center">
+            </div>
+            <div class="grupo-input">
+              <label>Contraseña</label>
+              <button *ngIf="this.cambiarContra == true" id="btn-pssw" type="button" (click)="changePassword()">Cambiar
+                contraseña</button>
+              <input *ngIf="this.cambiarContra == false" formControlName="password" id="inputContraseña"
+                type="password">
+            </div>
+            <div class="grupo-input">
+              <button (click)="update()" id="btn-save" type="button">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
