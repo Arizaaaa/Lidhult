@@ -159,6 +159,48 @@ class StudentController extends Controller
         
     }
 
+    public function puntuation(Request $request) {
+
+        try{
+
+            DB::beginTransaction();
+            $request->validate([
+                'id' => 'required',
+            ]);
+
+            $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]);
+
+            foreach ($puntuation as $points) { $total =+ $points; }
+
+            $character = DB::select('SELECT *
+                                    FROM characters c
+                                    JOIN students s
+                                    WHERE c.id = s.character_id
+                                    AND s.id = ?',
+            [$request->id]);
+
+            if($total > 4000) {$lvl = 5;}
+            else if($total > 3000) {$lvl = 4;}
+            else if($total > 2000) {$lvl = 3;}
+            else if($total > 1000) {$lvl = 2;}
+            else{$lvl = 1;}
+
+            // DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
+            // [$total, $character->id, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
+            // DB::commit();
+
+        } catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha podido actualizar! + $e"
+            ]);
+
+        }
+
+    }
+
     public function avatar(Request $request) {
 
         try{
