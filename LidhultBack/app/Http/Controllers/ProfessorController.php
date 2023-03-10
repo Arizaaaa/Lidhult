@@ -25,7 +25,7 @@ class ProfessorController extends Controller
                 'birth_date' => 'required',
             ]);
 
-            if(Student::where('email', '=', $request->email)->exists()
+            if(Student::where('email', '=', $request->email)->exists() // Verifica que el email o nick no lo use un estudiante
             || Student::where('nick', '=', $request->nick)->exists()) {
 
                 abort(500);
@@ -36,18 +36,15 @@ class ProfessorController extends Controller
             $professor->surnames = $request->surnames;
             $professor->email = $request->email;
             $professor->nick = $request->nick;
-            $professor->password = Hash::make($request->password);
+            $professor->password = Hash::make($request->password); // Encripta la contraseña
             $professor->center = $request->birth_date;
             $professor->save();
             DB::commit();
 
-            $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
-                [$professor->email, $professor->nick]);
-
             return response()->json([
                 "status" => 1,
                 "msg" => "Se ha insertado!",
-                "data" => $user
+                "data" => $professor
             ]);
 
         } catch (Exception $e) {
@@ -70,8 +67,7 @@ class ProfessorController extends Controller
                 'id' => 'required',
             ]);
 
-            $professor = Professor::findOrFail($request->id);
-            $professor = DB::table('professors')->where('id', $request->id)->first();
+            $professor = Professor::findOrFail($request->id); // Verifica que el profesor exista
             DB::table('professors')->where('id', $request->id)->delete();
             DB::commit();
 
@@ -107,20 +103,20 @@ class ProfessorController extends Controller
                 'center' => 'required',
             ]);
 
-            $password = Hash::make($request->password);
+            $password = Hash::make($request->password); // Encripta la contraseña
 
-            if(Student::where('email', '=', $request->email)->exists()
+            if(Student::where('email', '=', $request->email)->exists() // Verifica que el email o nick lo use un estudiante
             || Student::where('nick', '=', $request->nick)->exists()) {
 
                 abort(500);
             }
 
-            if($request->avatar == "") {
+            if($request->avatar == "") { // Si el avatar no se modifica, no se actualiza
 
                 DB::update('update professors set name = ?, surnames = ?, email = ?, nick = ?, password = ?, center = ? WHERE id = ?',
                 [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->center, $request->id]);
                 DB::commit();
-            } else {
+            } else { // Si el avatar se actualiza se decodifica y se actualiza
 
                 // Obtener el contenido de la imagen en base64 desde la solicitud
                 $base64_image = $request->avatar;
@@ -151,14 +147,10 @@ class ProfessorController extends Controller
 
         } catch (Exception $e) {
 
-            $user = DB::select('select * FROM professors WHERE email = ? OR nick = ?',
-                [$request->email, $request->nick]);
-
             DB::rollBack();
             return response()->json([
                 "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
-                "data" => $user
             ]);
         }    
         
@@ -207,7 +199,7 @@ class ProfessorController extends Controller
                 'center' => '',
             ]);
 
-            $professor = Professor::findOrFail($request->id);
+            $professor = Professor::findOrFail($request->id); // Verifica que el profesor exista
             $professor = DB::select('select * FROM professors WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR center = ?',
             [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->center]);
 
@@ -225,7 +217,6 @@ class ProfessorController extends Controller
                 "status" => 0,
                 "msg" => "No se ha encontrado! + $e",
             ]);
-
         }
     }
 }

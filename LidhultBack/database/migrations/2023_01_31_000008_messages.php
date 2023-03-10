@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('sender');
             $table->string('receiver');
             $table->string('issue')->nullable();
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
