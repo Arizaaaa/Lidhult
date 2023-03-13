@@ -24,7 +24,6 @@ class ProfessorFactory extends Factory
             'nick' => $this->faker->name(10),
             'password' => 'password',
             'center' => $this->faker->name(10),
-            
         ];
     }
 }
