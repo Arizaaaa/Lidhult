@@ -64,7 +64,7 @@
         display: flex;
         width: 100%;
         gap: 18px;
-        margin-top: 80px;
+        margin-top: 20px;
     }
 
     .rank1 img {
@@ -227,27 +227,108 @@
     }
 }
 
-
-
-/* section {
+.btn {
     display: flex;
-    width: 750px;
-    height: 512px;
-}
+    padding: 11px 15px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    background: #92BB1E;
+    transition: 1s;
+    box-shadow: 6px 6px 0 black;
+    transform: skewX(-15deg);
+    border: none;
+  }
 
-section img {
-    width: 0px;
-    flex-grow: 1;
-    object-fit: cover;
-    opacity: .8;
-    transition: .5s ease;
-}
+  .div2{
+    display: flex;
+  }
+  
+  .btn:focus {
+    outline: none;
+  }
+  
+  .btn:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 #AA920F;
+  }
+  
+  .btn .arrow {
+    transition: 0.5s;
+    margin-right: 0px;
+  }
+  
+  .btn:hover  .arrow {
+    transition: 0.5s;
+    margin-right: 15px;
+  }
+  
+  .span {
+    transform: skewX(15deg)
+  }
+  
+  .arrow {
+    width: 40px;
+    margin-left: 30px;
+    position: relative;
+    top: 12%;
+  }
+  
+  .uno {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+  
+  .dos {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+  
+  .btn:hover .tres {
+    animation: color_anim 1s infinite 0.2s;
+  }
+  
+  .btn:hover .uno {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+  
+  .btn:hover .dos {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+  
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+  
+    50% {
+      fill: #AA920F;
+    }
+  
+    100% {
+      fill: white;
+    }
+  }
 
-section img:hover {
-    cursor: crosshair;
-    width: 400px;
-    opacity: 1;
-    filter: contrast(120%);
-} */
 
 
+/* 
+Colores para el azul
+#002D62
+#FFAA33
+*/
+
+/* 
+Colores para el rojo
+#452c63
+#9e1b32 
+*/
+
+/* 
+Colores para el verde
+#92BB1E
+#AA920F 
+*/
