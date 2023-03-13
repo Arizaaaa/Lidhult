@@ -169,33 +169,33 @@ class StudentController extends Controller
                 'id' => 'required',
             ]);
 
-            $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]);
+            $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]); // Selecciona todos los puntos
 
             $total = 0;
 
-            for ($i = 0; $i < count($puntuation); $i++) { $total += $puntuation[$i]->puntuation; }
+            for ($i = 0; $i < count($puntuation); $i++) { $total += $puntuation[$i]->puntuation; } // Sua todos los puntos
 
             $character = DB::select('SELECT c.name
                                     FROM characters c
                                     JOIN students s
                                     WHERE s.character_id = c.id
                                     AND s.id = ?',
-            [$request->id]);
+            [$request->id]); // Selecciona el nombre del personaje del estudiante
 
-            if($total > 4000) {$lvl = 5;}
+            if($total > 4000) {$lvl = 5;} // Determina el nivel según los puntos totales del estudiate
             else if($total > 3000) {$lvl = 4;}
             else if($total > 2000) {$lvl = 3;}
             else if($total > 1000) {$lvl = 2;}
             else {$lvl = 1;}
 
-            $newCharacter = DB::select('SELECT id
+            $newCharacter = DB::select('SELECT id 
                                         FROM characters
                                         WHERE name = ?
                                         AND level = ?',
-            [$character[0]->name, $lvl]);
+            [$character[0]->name, $lvl]); // Selecciona el id del personaje actualizado por los puntos
 
             DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
-            [$total, $newCharacter[0]->id, $request->id]);
+            [$total, $newCharacter[0]->id, $request->id]); // Actualiza el estudiante
             DB::commit();
 
             return response()->json([

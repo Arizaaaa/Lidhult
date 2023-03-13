@@ -83,7 +83,7 @@ class RankingController extends Controller
         }
     }
 
-    public function showProfessorView($id) {
+    public function showProfessorView($id) { // Devuelve los rankings que ha creado el profesor
 
         try{
 

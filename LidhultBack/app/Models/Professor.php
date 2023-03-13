@@ -19,5 +19,4 @@ class Professor extends Model
         'avatar',
         'center',
     ];
-
 }
