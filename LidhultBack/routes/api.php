@@ -21,23 +21,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('createProfessor', [ProfessorController::class, 'create']);
-Route::delete('deleteProfessor', [ProfessorController::class, 'delete']);
-Route::post('updateProfessor', [ProfessorController::class, 'update']);
-Route::post('readProfessor', [ProfessorController::class, 'read']);
-Route::post('createStudent', [StudentController::class, 'create']);
-Route::delete('deleteStudent', [StudentController::class, 'delete']);
-Route::post('updateStudent', [StudentController::class, 'update']);
-Route::post('readStudent', [StudentController::class, 'read']);
-Route::post('login', [LoginController::class, 'login']);
-Route::post('createRanking', [RankingController::class, 'create']);
-Route::get('showRanking/{id}', [RankingController::class, 'show']);
-Route::post('joinRanking', [Ranking_usersController::class, 'joinRanking']);
-Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']);
-Route::post('createRanking_user', [Ranking_usersController::class, 'create']);
-Route::get('indexCharacters', [CharacterController::class, 'index']);
-Route::post('sendMessage', [MessageController::class, 'createMessage']);
-Route::post('sendRequest', [MessageController::class, 'createRequest']);
+Route::post('createProfessor', [ProfessorController::class, 'create']); // Crear profesor
+Route::delete('deleteProfessor', [ProfessorController::class, 'delete']); // Eliminar profesor
+Route::post('updateProfessor', [ProfessorController::class, 'update']); // Actualizar profesor
+Route::post('readProfessor', [ProfessorController::class, 'read']); // Leer profesor
+
+Route::post('createStudent', [StudentController::class, 'create']); // Crea estudiante
+Route::delete('deleteStudent', [StudentController::class, 'delete']); // Eliminar estudiante
+Route::post('updateStudent', [StudentController::class, 'update']); // Actualizar estudiante
+Route::post('readStudent', [StudentController::class, 'read']); // Leer estudiante
+Route::post('puntuation', [StudentController::class, 'puntuation']); // Modifica la puntuación total y el personaje del estudiante
+
+Route::post('login', [LoginController::class, 'login']); // Iniciar sesión
+
+Route::post('createRanking', [RankingController::class, 'create']); // Crear ranking
+Route::get('showStudentRanking/{id}', [RankingController::class, 'showStudentView']); // Mostrar rankings al estudiante
+Route::get('showProfessorRanking/{id}', [RankingController::class, 'showProfessorView']); // Mostrar rankings al professor
+Route::get('newCode/{id}', [RankingController::class, 'newCode']); // Actualizar código de ranking
+
+Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']); // Mostrar estudiantes de ranking
+Route::post('createRanking_user', [Ranking_usersController::class, 'create']); // Crear log de rankings
+
+Route::get('indexCharacters', [CharacterController::class, 'index']); // Mostrar todos los personajes
+
+Route::post('sendMessage', [MessageController::class, 'createMessage']); // Enviar mensaje
+Route::post('sendRequest', [MessageController::class, 'createRequest']); // Enviar solicitud
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

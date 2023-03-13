@@ -29,7 +29,7 @@ class StudentController extends Controller
                 'birth_date' => 'required',
             ]);
             
-            if(Professor::where('email', '=', $request->email)->exists()
+            if(Professor::where('email', '=', $request->email)->exists() // Verifica que el email o nick no lo use un profesor
             || Professor::where('nick', '=', $request->nick)->exists()) {
 
                 abort(500);
@@ -45,12 +45,10 @@ class StudentController extends Controller
             $student->save();
             DB::commit();
 
-            $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
-            [$student->email, $student->nick]);
             return response()->json([
                 "status" => 1,
                 "msg" => "Se ha insertado!",
-                "data" => $user,
+                "data" => $student,
             ]);
 
         } catch (Exception $e) {
@@ -72,8 +70,7 @@ class StudentController extends Controller
                 'id' => 'required',
             ]);
 
-            $student = Student::findOrFail($request->id);
-            $student = DB::table('students')->where('id', $request->id)->first();
+            $student = Student::findOrFail($request->id); // Verifica que el estudiante exista
             DB::table('students')->where('id', $request->id)->delete();
             DB::commit();
 
@@ -109,20 +106,20 @@ class StudentController extends Controller
                 'birth_date' => 'required',
             ]);
 
-            $password = Hash::make($request->password);
+            $password = Hash::make($request->password); // Encripta la contraseña
 
-            if(Professor::where('email', '=', $request->email)->exists()
+            if(Professor::where('email', '=', $request->email)->exists() // Verifica que el email o nick no lo use un profesor
             || Professor::where('nick', '=', $request->nick)->exists()) {
 
                 abort(500);
             }
             
-            if($request->avatar == "") {
+            if($request->avatar == "") { // Si el avatar no se actualiza
             
                 DB::update('update students set name = ?, surnames = ?, email = ?, nick = ?, password = ?, birth_date = ? WHERE id = ?',
                 [$request->name, $request->surnames, $request->email, $request->nick, $password, $request->birth_date, $request->id]);
                 DB::commit();
-            } else {
+            } else { // Si el avatar se actualiza
 
                 // Obtener el contenido de la imagen en base64 desde la solicitud
                 $base64_image = $request->avatar;
@@ -154,21 +151,16 @@ class StudentController extends Controller
 
         } catch (Exception $e) {
 
-            $user = DB::select('select * FROM students WHERE email = ? OR nick = ?',
-                [$request->email, $request->nick]);
-
             DB::rollBack();
             return response()->json([
                 "status" => 0,
                 "msg" => "No se ha podido actualizar! + $e",
-                "data" => $user
-
             ]);
         }    
         
     }
 
-    public function puntuation(Request $request) {
+    public function puntuation(Request $request) { // Actualiza los puntos totales del estudiante y el nivel de personaje
 
         try{
 
@@ -177,26 +169,39 @@ class StudentController extends Controller
                 'id' => 'required',
             ]);
 
-            $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]);
+            $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]); // Selecciona todos los puntos
 
-            foreach ($puntuation as $points) { $total =+ $points; }
+            $total = 0;
 
-            $character = DB::select('SELECT *
+            for ($i = 0; $i < count($puntuation); $i++) { $total += $puntuation[$i]->puntuation; } // Sua todos los puntos
+
+            $character = DB::select('SELECT c.name
                                     FROM characters c
                                     JOIN students s
-                                    WHERE c.id = s.character_id
+                                    WHERE s.character_id = c.id
                                     AND s.id = ?',
-            [$request->id]);
+            [$request->id]); // Selecciona el nombre del personaje del estudiante
 
-            if($total > 4000) {$lvl = 5;}
+            if($total > 4000) {$lvl = 5;} // Determina el nivel según los puntos totales del estudiate
             else if($total > 3000) {$lvl = 4;}
             else if($total > 2000) {$lvl = 3;}
             else if($total > 1000) {$lvl = 2;}
-            else{$lvl = 1;}
+            else {$lvl = 1;}
 
-            // DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
-            // [$total, $character->id, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
-            // DB::commit();
+            $newCharacter = DB::select('SELECT id 
+                                        FROM characters
+                                        WHERE name = ?
+                                        AND level = ?',
+            [$character[0]->name, $lvl]); // Selecciona el id del personaje actualizado por los puntos
+
+            DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
+            [$total, $newCharacter[0]->id, $request->id]); // Actualiza el estudiante
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha actualizado!"
+            ]);
 
         } catch (Exception $e) {
 
@@ -210,37 +215,7 @@ class StudentController extends Controller
 
     }
 
-    public function avatar(Request $request) {
-
-        try{
-
-            DB::beginTransaction();
-            $request->validate([
-                'dato' => 'required',
-                'avatar' => 'required',
-            ]);
-
-            DB::update('update students set avatar = ? WHERE email = ? OR nick = ?',
-            [$request->avatar, $request->dato, $request->dato]);
-            DB::commit();
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha actualizado!",
-            ]);
-
-        } catch (Exception $e) {
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "No se ha podido actualizar + $e!",
-            ]);
-
-        }
-
-    }
-
-    public function character(Request $request) {
+    public function character(Request $request) { // Actualiza el personaje
 
         try{
 

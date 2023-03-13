@@ -15,8 +15,4 @@ class Ranking extends Model
         'name',
         'code',
     ];
-
-     public function ranking_users(): HasMany {
-         return $this->hasMany(Ranking_users::class);  // referencia a
-     }
 }

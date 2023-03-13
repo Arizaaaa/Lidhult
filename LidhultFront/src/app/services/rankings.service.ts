@@ -11,10 +11,10 @@ export class RankingsService {
 
   showRankingsUrl:any
   showRankingUrl:any
-  joinRankingUrl:any
+  sendRequestUrl:any
 
   rankingsUsuarios(id:number) : Observable<any>{
-   this.showRankingsUrl = "http://localhost:8000/api/showRanking/"+id
+   this.showRankingsUrl = "http://localhost:8000/api/showStudentRanking/"+id
     
     return this.http.get<any>(this.showRankingsUrl).pipe(
       filter((value: any) => {
@@ -46,9 +46,9 @@ export class RankingsService {
    }
    
    unirseRankings(code:any, student_id:any) : Observable<any>{
-    this.joinRankingUrl = "http://localhost:8000/api/joinRanking"
+    this.sendRequestUrl = "http://localhost:8000/api/sendRequest"
     let request = {code, student_id};
-     return this.http.post<any>(this.joinRankingUrl,request).pipe(
+     return this.http.post<any>(this.sendRequestUrl,request).pipe(
        filter((value: any) => {
          let found = false;
          if(value != null){

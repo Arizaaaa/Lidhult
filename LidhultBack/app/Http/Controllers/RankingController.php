@@ -28,12 +28,12 @@ class RankingController extends Controller
 
             do{
 
-                $ranking->code = mt_rand(10000000, 99999999);
+                $ranking->code = mt_rand(10000000, 99999999); // Crea un numero de 8 cifras aleatorio
 
                 $user = DB::select('select code FROM rankings WHERE code = ?',
                 [$ranking->code]);
                 
-            } while ($user != null);
+            } while ($user != null); // Se repite si el número esta duplicado en la base de datos
 
             $ranking->save();
             DB::commit();
@@ -54,24 +54,7 @@ class RankingController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function showStudentView($id) // Devuelve los rankings a los que pertenece el usuario
     {
         try{
 
@@ -100,47 +83,21 @@ class RankingController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function showProfessorView($id) { // Devuelve los rankings que ha creado el profesor
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
         try{
 
-            $request->validate([    
-                'id' => '',
-                'name' => '',
-                'surnames' => '',
-                'email' => '',
-                'nick' => '',
-                'birth_date' => '',
-            ]);
+            $ranking = DB::select('SELECT *
+                                FROM rankings
+                                WHERE professor_id = ?',
+            [$id]);
 
-            $student = Ranking::findOrFail($request->id);
-            $student = DB::select('select * FROM rankings WHERE id = ? OR name = ? OR surnames = ? OR email = ? OR nick = ? OR birth_date = ?',
-            [$request->id, $request->name, $request->surnames, $request->email, $request->nick, $request->birth_date]);
-
-            return $student;
+            if($ranking == null) {abort(500);}
 
             return response()->json([
                 "status" => 1,
                 "msg" => "Vista exitosa!",
-                "data" => $student,
+                "data" => $ranking,
             ]);
 
         } catch (Exception $e) {
@@ -151,16 +108,23 @@ class RankingController extends Controller
             ]);
 
         }
+
+    }
+    
+    public function newCode($id) { // Actualiza el código del ranking
+
+        $ranking = Ranking::findOrFail($id);
+        $ranking = DB::select('select * FROM rankings WHERE id = ?', [$id]);
+
+        do{
+
+            $ranking[0]->code = mt_rand(10000000, 99999999); // Crea un numero de 8 cifras aleatorio
+
+            $user = DB::select('select code FROM rankings WHERE code = ?', [$ranking[0]->code]);
+            
+        } while ($user != null); // Se repite si el número esta duplicado en la base de datos
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
