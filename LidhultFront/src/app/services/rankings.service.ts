@@ -14,7 +14,7 @@ export class RankingsService {
   sendRequestUrl:any
 
   rankingsUsuarios(id:number) : Observable<any>{
-   this.showRankingsUrl = "http://localhost:8000/api/showRanking/"+id
+   this.showRankingsUrl = "http://localhost:8000/api/showStudentRanking/"+id
     
     return this.http.get<any>(this.showRankingsUrl).pipe(
       filter((value: any) => {

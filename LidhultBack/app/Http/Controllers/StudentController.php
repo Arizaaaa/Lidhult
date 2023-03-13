@@ -171,12 +171,14 @@ class StudentController extends Controller
 
             $puntuation = DB::select('SELECT puntuation FROM ranking_users WHERE student_id = ?', [$request->id]);
 
-            foreach ($puntuation as $points) { $total =+ $points; }
+            $total = 0;
 
-            $character = DB::select('SELECT *
+            for ($i = 0; $i < count($puntuation); $i++) { $total += $puntuation[$i]->puntuation; }
+
+            $character = DB::select('SELECT c.name
                                     FROM characters c
                                     JOIN students s
-                                    WHERE c.id = s.character_id
+                                    WHERE s.character_id = c.id
                                     AND s.id = ?',
             [$request->id]);
 
@@ -184,11 +186,22 @@ class StudentController extends Controller
             else if($total > 3000) {$lvl = 4;}
             else if($total > 2000) {$lvl = 3;}
             else if($total > 1000) {$lvl = 2;}
-            else{$lvl = 1;}
+            else {$lvl = 1;}
 
-            // DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
-            // [$total, $character->id, $request->email, $request->nick, $password, $filename, $request->birth_date, $request->id]);
-            // DB::commit();
+            $newCharacter = DB::select('SELECT id
+                                        FROM characters
+                                        WHERE name = ?
+                                        AND level = ?',
+            [$character[0]->name, $lvl]);
+
+            DB::update('update students set total_puntuation = ?, character_id = ? WHERE id = ?',
+            [$total, $newCharacter[0]->id, $request->id]);
+            DB::commit();
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha actualizado!"
+            ]);
 
         } catch (Exception $e) {
 

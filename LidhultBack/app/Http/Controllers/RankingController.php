@@ -54,7 +54,7 @@ class RankingController extends Controller
         }
     }
 
-    public function show($id)
+    public function showStudentView($id) // Devuelve los rankings a los que pertenece el usuario
     {
         try{
 
@@ -82,6 +82,34 @@ class RankingController extends Controller
 
         }
     }
+
+    public function showProfessorView($id) {
+
+        try{
+
+            $ranking = DB::select('SELECT *
+                                FROM rankings
+                                WHERE professor_id = ?',
+            [$id]);
+
+            if($ranking == null) {abort(500);}
+
+            return response()->json([
+                "status" => 1,
+                "msg" => "Vista exitosa!",
+                "data" => $ranking,
+            ]);
+
+        } catch (Exception $e) {
+
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha encontrado! + $e",
+            ]);
+
+        }
+
+    }
     
     public function newCode($id) { // Actualiza el código del ranking
 
@@ -97,4 +125,6 @@ class RankingController extends Controller
         } while ($user != null); // Se repite si el número esta duplicado en la base de datos
 
     }
+
+    
 }

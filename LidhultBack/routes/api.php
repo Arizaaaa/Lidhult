@@ -30,11 +30,13 @@ Route::post('createStudent', [StudentController::class, 'create']); // Crea estu
 Route::delete('deleteStudent', [StudentController::class, 'delete']); // Eliminar estudiante
 Route::post('updateStudent', [StudentController::class, 'update']); // Actualizar estudiante
 Route::post('readStudent', [StudentController::class, 'read']); // Leer estudiante
+Route::post('puntuation', [StudentController::class, 'puntuation']); // Modifica la puntuación total y el personaje del estudiante
 
 Route::post('login', [LoginController::class, 'login']); // Iniciar sesión
 
 Route::post('createRanking', [RankingController::class, 'create']); // Crear ranking
-Route::get('showRanking/{id}', [RankingController::class, 'show']); // Mostrar ranking
+Route::get('showStudentRanking/{id}', [RankingController::class, 'showStudentView']); // Mostrar rankings al estudiante
+Route::get('showProfessorRanking/{id}', [RankingController::class, 'showProfessorView']); // Mostrar rankings al professor
 Route::get('newCode/{id}', [RankingController::class, 'newCode']); // Actualizar código de ranking
 
 Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']); // Mostrar estudiantes de ranking
