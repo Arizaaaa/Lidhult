@@ -40,7 +40,8 @@ Route::get('showProfessorRanking/{id}', [RankingController::class, 'showProfesso
 Route::get('newCode/{id}', [RankingController::class, 'newCode']); // Actualizar código de ranking
 
 Route::get('indexUsers/{id}', [Ranking_usersController::class, 'index']); // Mostrar estudiantes de ranking
-Route::post('createRanking_user', [Ranking_usersController::class, 'create']); // Crear log de rankings
+// Route::post('createRanking_user', [Ranking_usersController::class, 'create']); // Crear log de rankings
+Route::post('updateRanking_user', [Ranking_usersController::class, 'update']); // Actualizar log de rankings
 
 Route::get('indexCharacters', [CharacterController::class, 'index']); // Mostrar todos los personajes
 

@@ -104,6 +104,9 @@ export class AuthService {
         }else{
           found = false
         }
+        if(value.data[0].center == undefined){ this.prof= false }
+        else {this.stud = false}
+        console.log(value)
         this.status = value['status'];
         this.user = value;
         return found
