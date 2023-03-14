@@ -45,10 +45,12 @@ class StudentController extends Controller
             $student->save();
             DB::commit();
 
+            $user = DB::select('select * from professors where nick = ?', [$request->nick]);
+
             return response()->json([
                 "status" => 1,
                 "msg" => "Se ha insertado!",
-                "data" => $student,
+                "data" => $user,
             ]);
 
         } catch (Exception $e) {
