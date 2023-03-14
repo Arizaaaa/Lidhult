@@ -1,0 +1,42 @@
+<div class="padre">
+    <div class="div3">
+        <div class="container">
+            <div class="wrapper"> <br><br>
+            <button class="btn btn-primary" type="button" (click)="volver()">Volver</button>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Posicion</th>
+                            <th>Nombre</th>
+                            <th>Puntos</th>
+                            <th>Bonificacion</th>
+                            <th>Agregar Puntos</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usu of this.users.data; let i = index">
+                            <td class="rango">{{i + 1}}</td>
+                            <td class="rango">{{usu.name}}</td>
+                            <td class="rango">{{usu.puntuation}}</td>
+                            <td class="rango">
+                                <select name="" id="">
+                                    <option value="">Positivo(+10)</option>
+                                    <option value="">Respuesa Acertada(+15)</option>
+                                    <option value="">Corregir Ejercico(+20)</option>
+                                    <option value="">Negativo(-10)</option>
+                                </select>
+                            </td>
+                            <td class="rango">
+                                <input type="number" placeholder="Sumar puntuacion"/>
+                            </td>
+                            <td class="rango">
+                                <button>Guardar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

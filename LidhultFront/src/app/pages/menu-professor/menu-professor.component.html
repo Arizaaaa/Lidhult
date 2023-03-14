@@ -1,0 +1,37 @@
+<div class="padre" *ngIf="this.rankingsService.ver ==  false">
+    <div class="div3">
+        <div class="container">
+            <header>
+                <h1>Rankings</h1>
+            </header>
+            <div class="wrapper">
+                <br><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let ran of this.rankings">
+                            <td class="rango" (click)="ranking(ran.id)">{{ran.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="padre" *ngIf="this.rankingsService.ver ==  true">
+    <div class="div3">
+        <div class="container">
+            <header>
+                <h1>Menu Ranking</h1>
+            </header>
+            <button class="btn btn-primary" type="button" (click)="modificarRanking()">Modificar Ranking</button>
+            <button class="btn btn-primary" type="button" (click)="volver()">Añadir Tareas</button>
+            <button class="btn btn-primary" type="button" (click)="volver()">Puntuar Tareas</button>
+            <button class="btn btn-primary" type="button" (click)="volver()">Volver</button>
+        </div>
+    </div>
+</div>

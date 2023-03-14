@@ -27,6 +27,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { MenuProfessorComponent } from './pages/menu-professor/menu-professor.component';
+import { ModificarRankingComponent } from './pages/modificar-ranking/modificar-ranking.component';
 
 
 
@@ -43,7 +44,8 @@ import { MenuProfessorComponent } from './pages/menu-professor/menu-professor.co
     HeaderComponent,
     CharacterComponent,
     HomeComponent,
-    MenuProfessorComponent
+    MenuProfessorComponent,
+    ModificarRankingComponent
   ],
   imports: [
     BrowserModule,

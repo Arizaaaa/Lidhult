@@ -69,8 +69,11 @@
             <li *ngIf="this.authService.status == 0">
               <a (click)="login()">Login</a>
             </li>
-            <li *ngIf="this.authService.status == 1">
+            <li *ngIf="this.authService.status == 1 && this.authService.user.data[0]['center'] == undefined">
               <a (click)="ranking()">Ranking</a>
+            </li>
+            <li *ngIf="this.authService.status == 1 && this.authService.user.data[0]['center'] != undefined">
+              <a (click)="menuRanking()">Ranking</a>
             </li>
             <li *ngIf="this.authService.status == 1">
               <a (click)="perfil()">Perfil</a>
