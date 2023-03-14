@@ -34,6 +34,8 @@ file:any;
   });
   
   ngOnInit(): void {
+
+    console.log(this.authService.user)
    
     if(this.authService.user.data[0]['center'] != undefined){
       this.updateForm.setValue({
