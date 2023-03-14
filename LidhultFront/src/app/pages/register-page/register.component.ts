@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
             this.student = value;
             if(value['status'] == 1){
               this.status = value['status']
-              this.router.navigate(['home']);
+              this.router.navigate(['character']);
               }
               this.comprobacionRegister(value);
             }
@@ -110,7 +110,7 @@ export class RegisterComponent implements OnInit {
             this.student = value;
             if(value['status'] == 1){
               this.status = value['status']
-              this.router.navigate(['home']);
+              this.router.navigate(['character']);
             }
             this.comprobacionRegister(value);
           }
