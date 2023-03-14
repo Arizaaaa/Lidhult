@@ -1,3 +1,4 @@
+import { ModificarRankingComponent } from './pages/modificar-ranking/modificar-ranking.component';
 import { MenuProfessorComponent } from './pages/menu-professor/menu-professor.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -30,8 +31,11 @@ const routes: Routes = [
   {path: 'perfil',
   component: PerfilComponent,
   canActivate: [AuthGuard]},
-  {path: 'menuProfesssor',
+  {path: 'menuProfessor',
   component: MenuProfessorComponent,
+  canActivate: [AuthGuard]},
+  {path: 'modificarRanking',
+  component: ModificarRankingComponent,
   canActivate: [AuthGuard]},
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 

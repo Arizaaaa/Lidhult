@@ -12,6 +12,8 @@ export class RankingsService {
   showRankingsUrl:any
   showRankingUrl:any
   sendRequestUrl:any
+  rankigSelected:any
+  ver:boolean = false;
 
   rankingsUsuarios(id:number) : Observable<any>{
    this.showRankingsUrl = "http://localhost:8000/api/showStudentRanking/"+id

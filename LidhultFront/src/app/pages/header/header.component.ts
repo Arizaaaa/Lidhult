@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
 
   ranking(){this.router.navigate(['ranking']); }
 
-  menuRanking(){this.router.navigate(['menuProfesssor']); }
+  menuRanking(){this.router.navigate(['menuProfessor']); }
 
   perfil(){this.router.navigate(['perfil']);}
 

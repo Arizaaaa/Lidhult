@@ -107,12 +107,10 @@ file:any;
     this.user['id'] = this.authService.user.data[0]['id']
     if(this.file != undefined){this.user['avatar'] = this.file}
     else {this.user['avatar'] = ""}
-    console.log(this.user)
 
     this.authService.updateProfesor(this.user,id).subscribe({
 
       next: (value: RegisterDataStudent) => {
-        console.log(value)
         this.user = value;
         this.router.navigate(['perfil']);
       }
