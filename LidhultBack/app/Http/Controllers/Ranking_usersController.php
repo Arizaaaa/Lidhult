@@ -39,4 +39,38 @@ class Ranking_usersController extends Controller
             ]);
         }
     }
+
+    public function update(Request $request) { // Actualiza un estudiante
+
+        try{
+            
+            DB::beginTransaction();
+            $request->validate([
+                'ranking_id' => 'required',
+                'student_id' => 'required',
+                'puntuation' => 'required',
+            ]);
+            
+            DB::update('update ranking_users set puntuation = ? WHERE ranking_id = ? AND student_id = ?',
+            [$request->puntuation, $request->ranking_id, $request->student_id]);
+            DB::commit();            
+            
+            $user = DB::select('select * FROM students WHERE email = ? OR nick = ?', [$request->email, $request->nick]);
+            
+            return response()->json([
+                "status" => 1,
+                "msg" => "Se ha actualizado!",
+                "data" => $user
+            ]);
+
+        } catch (Exception $e) {
+
+            DB::rollBack();
+            return response()->json([
+                "status" => 0,
+                "msg" => "No se ha podido actualizar! + $e",
+            ]);
+        }    
+        
+    }
 }
