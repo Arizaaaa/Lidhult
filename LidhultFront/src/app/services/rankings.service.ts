@@ -13,8 +13,7 @@ export class RankingsService {
   showRankingUrl:any
   sendRequestUrl:any
   rankigSelected:any
-  ver:boolean = false;
-
+  ver:boolean = false
   rankingsUsuarios(id:number) : Observable<any>{
    this.showRankingsUrl = "http://localhost:8000/api/showStudentRanking/"+id
     
@@ -30,6 +29,23 @@ export class RankingsService {
         })
     );
   }
+
+  rankingsProfesor(id:number) : Observable<any>{
+
+    this.showRankingsUrl = "http://localhost:8000/api/showProfessorRanking/"+id
+     
+     return this.http.get<any>(this.showRankingsUrl).pipe(
+       filter((value: any) => {
+         let found = false;
+         if(value != null){
+           found = true
+         }else{
+           found = false
+         }
+         return found
+         })
+     );
+   }
 
   verRankings(id:number) : Observable<any>{
     this.showRankingUrl = "http://localhost:8000/api/indexUsers/"+id

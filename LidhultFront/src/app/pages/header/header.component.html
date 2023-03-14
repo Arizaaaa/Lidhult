@@ -14,10 +14,10 @@
             <li *ngIf="this.authService.status == 0">
               <a (click)="login()">Login</a>
             </li>
-            <li *ngIf="this.authService.status == 1 && this.authService.user.data[0]['center'] == undefined">
+            <li *ngIf="this.authService.status == 1 && this.authService.stud == true">
               <a (click)="ranking()">Ranking</a>
             </li>
-            <li *ngIf="this.authService.status == 1 && this.authService.user.data[0]['center'] != undefined">
+            <li *ngIf="this.authService.status == 1 && this.authService.prof == true">
               <a (click)="menuRanking()">Menu Rankings</a>
             </li>
             <li *ngIf="this.authService.status == 1">
