@@ -1,58 +1,121 @@
-<div class="container-xl px-4 mt-4">
+<!-- <div class="container-xl px-4 mt-4">
   <div class="row">
     <form [formGroup]="updateForm">
-    <div class="col-xl-4">
-      <div class="card mb-4 mb-xl-0">
-        <div class="card-header" *ngIf="this.authService.user.data[0]['center'] != undefined">Profesor: {{this.authService.user.data[0]['nick']}}</div>
-        <div class="card-header" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">Estudiante: {{this.authService.user.data[0]['nick']}}</div>
-        <div class="card-body text-center">
-          <img class="img-account-profile rounded-circle mb-2" src="http://localhost:8000/images/custom/{{this.authService.user.data[0]['avatar']}}"
-            alt="">
-          <div class="small font-italic text-muted mb-4"></div>
-          <input type="file" formControlName = "img" (change)="onFileSelected($event)" #fileUpload>
+      <div class="col-xl-4">
+        <div class="card mb-4 mb-xl-0">
+          <div class="card-header" *ngIf="this.authService.user.data[0]['center'] != undefined">Profesor:
+            {{this.authService.user.data[0]['nick']}}</div>
+          <div class="card-header" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">Estudiante:
+            {{this.authService.user.data[0]['nick']}}</div>
+          <div class="card-body text-center">
+            <img class="img-account-profile rounded-circle mb-2"
+              src="http://localhost:8000/images/custom/{{this.authService.user.data[0]['avatar']}}" alt="">
+            <div class="small font-italic text-muted mb-4"></div>
+            <input type="file" formControlName="img" (change)="onFileSelected($event)" #fileUpload>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-xl-8">
-      <div class="card mb-4">
-        <div class="card-header">Detalles</div>
-        <div class="card-body">
+      <div class="col-xl-8">
+        <div class="card mb-4">
+          <div class="card-header">Detalles</div>
+          <div class="card-body">
             <div class="row gx-3 mb-3">
               <div class="col-md-6">
                 <label class="small mb-1">Nombre</label>
-                <input class="form-control" formControlName = "name" id="inputNombre" type="text">
+                <input class="form-control" formControlName="name" id="inputNombre" type="text">
               </div>
               <div class="col-md-6">
                 <label class="small mb-1">Apellido</label>
-                <input class="form-control" formControlName = "surnames" id="inputApellido" type="text">
+                <input class="form-control" formControlName="surnames" id="inputApellido" type="text">
               </div>
             </div>
             <div class="mb-3">
               <label class="small mb-1" for="inputEmailAddress">Email</label>
-              <input class="form-control" formControlName = "email" id="inputEmailAddress" type="email">
+              <input class="form-control" formControlName="email" id="inputEmailAddress" type="email">
             </div>
             <mat-form-field appearance="fill" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
-              <input matInput [matDatepicker]="picker" formControlName="date"/>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
               <mat-hint>MM/DD/YYYY</mat-hint>
               <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker> 
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <div class="mb-3" *ngIf="this.authService.user.data[0]['center'] != undefined">
               <label class="small mb-1" for="inputEmailAddress">Centro</label>
-              <input class="form-control" formControlName = "center" id="inputEmailAddress" type="center">
+              <input class="form-control" formControlName="center" id="inputEmailAddress" type="center">
             </div>
             <div class="row gx-3 mb-3">
               <div class="col-md-6">
                 <label class="small mb-1">Contraseña</label>
                 <br *ngIf="this.cambiarContra == true">
-                <button class="btn btn-primary" *ngIf="this.cambiarContra == true" type="button" (click)="changePassword()">Cambiar contraseña</button>
-                <input *ngIf="this.cambiarContra == false" class="form-control" formControlName = "password" id="inputContraseña" type="password">
+                <button class="btn btn-primary" *ngIf="this.cambiarContra == true" type="button"
+                  (click)="changePassword()">Cambiar contraseña</button>
+                <input *ngIf="this.cambiarContra == false" class="form-control" formControlName="password"
+                  id="inputContraseña" type="password">
               </div>
             </div>
             <button class="btn btn-primary" (click)="update()" type="button">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<div class="padre">
+  <div class="div3">
+    <div class="body">
+      <div class="img-perfil">
+        <img src="http://127.0.0.1:8000/images\custom\640313c4a1c61.webp">
+      </div>
+      <div class="img-character">
+        <img src="http://127.0.0.1:8000/images\common/Eze1.webp">
+      </div>
+      <div class="form">
+        <div class="form-container">
+          <form [formGroup]="updateForm">
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
+              <div class="nick-container">
+                <label id="nick-usuario">
+                  Profesor: {{this.authService.user.data[0]['nick']}}
+                </label>
+              </div>
+            </div>
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['birth_date'] != undefined">
+              <div class="nick-container"><label id="nick-usuario">
+                Estudiante:
+                {{this.authService.user.data[0]['nick']}}
+              </label>
+            </div>
+            </div>
+            <div class="grupo-input">
+              <label>Nombre</label>
+              <input formControlName="name" id="inputNombre" type="text">
+            </div>
+            <div class="grupo-input">
+              <label>Apellido</label>
+              <input formControlName="surnames" id="inputApellido" type="text">
+            </div>
+            <div class="grupo-input">
+              <label>Email</label>
+              <input formControlName="surnames" id="inputApellido" type="email">
+            </div>
+            <div class="grupo-input" *ngIf="this.authService.user.data[0]['center'] != undefined">
+              <label>Centro</label>
+              <input formControlName="center" id="inputEmailAddress" type="center">
+            </div>
+            <div class="grupo-input">
+              <label>Contraseña</label>
+              <button *ngIf="this.cambiarContra == true" id="btn-pssw" type="button" (click)="changePassword()">Cambiar
+                contraseña</button>
+              <input *ngIf="this.cambiarContra == false" formControlName="password" id="inputContraseña"
+                type="password">
+            </div>
+            <div class="grupo-input">
+              <button (click)="update()" id="btn-save" type="button">Guardar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </form>
   </div>
 </div>

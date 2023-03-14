@@ -13,8 +13,4 @@ class Ranking_user extends Model
     protected $fillable = [
         'puntuation',
     ];
-
-    public function rankings(): BelongsTo {
-        return $this->belongsTo(Ranking::class);   // referencia pertenece a
-    }
 }

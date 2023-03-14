@@ -17,6 +17,7 @@ class Student extends Model
         'password',
         'character_id',
         'avatar',
+        'total_puntuation',
         'birth_date',
     ];
 }

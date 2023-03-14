@@ -1,58 +1,3 @@
-
-<!-- Version main -->
-<!-- <mat-toolbar color="primary">
-
-    <mat-toolbar-row>
-       <span><a (ngSubmit)="main()">Lidhult</a></span>
-       <span class="spacer"></span>
-       <form *ngIf="this.authService.status == 0" (ngSubmit)="register()">
-         <button mat-raised-button color="primary" >Register</button>
-       </form>
-       <form *ngIf="this.authService.status == 0" (ngSubmit)="login()">
-         <button mat-raised-button color="primary" >Login</button>
-       </form>
-       <form *ngIf="this.authService.status == 1" (ngSubmit)="main()">
-         <button mat-raised-button color="primary" >Perfil</button>
-       </form>
-       <form *ngIf="this.authService.status == 1" (ngSubmit)="logout()">
-         <button mat-raised-button color="primary" >Logout</button>
-       </form>
-    </mat-toolbar-row >
-
- </mat-toolbar> -->
-
-<!-- Opcion1 -->
-
-<!-- <div class="padre">
-  <div class="div1">
-    <header class="header">
-      <div class="logo">
-        <span (click)="home()">Lidhult</span>
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li *ngIf="this.authService.status == 0">
-            <a (click)="register()">Register</a>
-          </li>
-          <li *ngIf="this.authService.status == 0">
-            <a (click)="login()">Login</a>
-          </li>
-          <li *ngIf="this.authService.status == 1 && this.authService.status == 1 ">
-            <a (click)="ranking()">Ranking</a>
-          </li>
-          <li *ngIf="this.authService.status == 1">
-            <a (click)="perfil()">Perfil</a>
-          </li>
-          <li *ngIf="this.authService.status == 1">
-            <a (click)="logout()">Logout</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  </div>
-</div> -->
-
-<!-- Opcion2 -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="padre">
   <div class="div1">
@@ -73,7 +18,7 @@
               <a (click)="ranking()">Ranking</a>
             </li>
             <li *ngIf="this.authService.status == 1 && this.authService.user.data[0]['center'] != undefined">
-              <a (click)="menuRanking()">Ranking</a>
+              <a (click)="menuRanking()">Menu Rankings</a>
             </li>
             <li *ngIf="this.authService.status == 1">
               <a (click)="perfil()">Perfil</a>

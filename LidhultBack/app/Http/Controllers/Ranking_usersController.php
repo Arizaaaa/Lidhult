@@ -10,41 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Ranking_usersController extends Controller
 {
 
-    public function create(Request $request)
-    {
-        try{
-            
-            DB::beginTransaction();
-            $request->validate([
-                'ranking_id' => 'required',
-                'student_id' => 'required',
-                'puntuation' => '',
-            ]);
-
-            $user = new Ranking_user();
-            $user->ranking_id = $request->ranking_id;
-            $user->student_id = $request->student_id;
-            $user->puntuation = 0;
-            $user->save();
-            DB::commit();
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha insertado!",
-                "data" => $user,
-            ]);
-
-        } catch (Exception $e) {
-
-            DB::rollBack();
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se ha podido insertar! + $e",
-            ]);
-        }
-    }
-
-    public function index($id){
+    public function index($id){ // Devuelve los usuarios del ranking deseado
 
         try{
             
@@ -54,9 +20,10 @@ class Ranking_usersController extends Controller
                                         WHERE s.id = r.student_id
                                         AND r.ranking_id = ?
                                         ORDER BY puntuation DESC',
+
             [$id]);
 
-            if ($ranking_users == null) {abort(500);}
+            if ($ranking_users == null) {abort(500);} // Devuelve error si el ranking no existe
 
             return response()->json([
                 "status" => 1,
@@ -71,100 +38,5 @@ class Ranking_usersController extends Controller
                 "msg" => "No se ha encontrado! + $e",
             ]);
         }
-
-    }
-    
-    public function joinRanking(Request $request){
-
-        try{
-            
-            DB::beginTransaction();
-            $request->validate([
-                'code' => 'required',
-                'student_id' => 'required',
-            ]);
-
-            $ranking = DB::select('SELECT * FROM rankings WHERE code = ?', [$request->code]);
-
-            if($ranking == null) {abort(500);}
-
-            $user = new Ranking_user();
-            $user->ranking_id = $ranking[0]->id;
-            $user->student_id = $request->student_id;
-            $user->puntuation = 0;
-            $user->save();
-            DB::commit();
-
-            return response()->json([
-                "status" => 1,
-                "msg" => "Se ha insertado!",
-                "data" => $user,
-            ]);
-
-        } catch (Exception $e) {
-
-            DB::rollBack();
-            return response()->json([
-                "status" => 0,
-                "msg" => "No se ha podido insertar! + $e",
-            ]);
-        }
-    }
-
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

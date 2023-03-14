@@ -16,7 +16,7 @@ class CharacterFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition() {
+    public function definition() { // Tabla predefinida de personajes
 
         DB::table('characters')->delete();
 
