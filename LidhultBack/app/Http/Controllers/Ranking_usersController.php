@@ -84,7 +84,7 @@ class Ranking_usersController extends Controller
                 'student_id' => 'required',
             ]);
 
-            DB::table('ranking_users')->where('ranking_id', $request->ranking_id)->and('student_id', $request->student_id)->delete();
+            DB::table('ranking_users')->where('ranking_id', $request->ranking_id)->where('student_id', $request->student_id)->delete();
             DB::commit();
 
             return response()->json([
