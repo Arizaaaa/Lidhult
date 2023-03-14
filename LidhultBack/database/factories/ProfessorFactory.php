@@ -19,10 +19,10 @@ class ProfessorFactory extends Factory
     {
         return [
         
-            'name' => $this->faker->name(10),
-            'surnames' => $this->faker->name(10).' '.$this->faker->name(10),
+            'name' => $this->faker->firstName(10),
+            'surnames' => $this->faker->lastName(10).' '.$this->faker->lastName(10),
             'email' => $this->faker->safeEmail,
-            'nick' => $this->faker->name(10),
+            'nick' => $this->faker->firstName(10),
             'password' => Hash::make('password'),
             'center' => $this->faker->name(10),
             
