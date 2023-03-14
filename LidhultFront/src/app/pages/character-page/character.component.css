@@ -234,7 +234,7 @@
     text-decoration: none;
     font-size: 25px;
     color: white;
-    background: #92BB1E;
+    /* background: 	#494451; */
     transition: 1s;
     box-shadow: 6px 6px 0 black;
     transform: skewX(-15deg);
@@ -251,7 +251,8 @@
   
   .btn:hover {
     transition: 0.5s;
-    box-shadow: 10px 10px 0 #AA920F;
+    /* box-shadow: 10px 10px 0 #8B4B90; */
+    cursor: pointer;
   }
   
   .btn .arrow {
@@ -305,7 +306,7 @@
     }
   
     50% {
-      fill: #AA920F;
+      /* fill: #8B4B90; */
     }
   
     100% {
@@ -316,19 +317,37 @@
 
 
 /* 
-Colores para el azul
+Colores para el 1
 #002D62
 #FFAA33
 */
 
 /* 
-Colores para el rojo
+Colores para el 2
 #452c63
 #9e1b32 
 */
 
 /* 
-Colores para el verde
+Colores para el 3
 #92BB1E
 #AA920F 
+*/
+
+/* 
+Colores para el 4
+#0066b2
+#A9A9A9 
+*/
+
+/* 
+Colores para el 5
+#daa520
+#174A68
+*/
+
+/* 
+Colores para el 6
+#494451
+#8B4B90
 */
