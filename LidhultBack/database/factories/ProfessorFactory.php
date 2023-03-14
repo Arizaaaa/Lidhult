@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Professor>
@@ -22,7 +23,7 @@ class ProfessorFactory extends Factory
             'surnames' => $this->faker->name(10).' '.$this->faker->name(10),
             'email' => $this->faker->safeEmail,
             'nick' => $this->faker->name(10),
-            'password' => 'password',
+            'password' => Hash::make('password'),
             'center' => $this->faker->name(10),
             
         ];
