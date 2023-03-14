@@ -31,7 +31,7 @@ export class MenuProfessorComponent implements OnInit {
 
   rankingsUsuarios(){
 
-    this.rankingsService.rankingsUsuarios(this.authService.user.data[0].id).subscribe({
+    this.rankingsService.rankingsProfesor(this.authService.user.data[0].id).subscribe({
         
       next: (value: any) => {
         this.rankings = value.data;
